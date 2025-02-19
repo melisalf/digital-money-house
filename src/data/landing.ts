@@ -1,4 +1,3 @@
-// TODO: en un futuro esta data puede venir de un CMS o de una API
 export const cardsData = {
 		transfer: {
 			title: "Transferí dinero",
