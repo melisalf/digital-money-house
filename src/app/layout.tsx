@@ -3,9 +3,8 @@ import { Open_Sans } from "next/font/google";
 import { Metadata } from "../../node_modules/next/types";
 import "./globals.css";
 
-
 const openSans = Open_Sans({
-  weight: ["300", "400", "600","700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
@@ -19,18 +18,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
       <body
         className={`w-full min-h-screen flex grow relative flex-col justify-between bg-dark1 text-white ${openSans.className}`}
       >
-        {children}
+       {children}
+  
+   
         <Footer />
       </body>
-      
     </html>
   );
 }

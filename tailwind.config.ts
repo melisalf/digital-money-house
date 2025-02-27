@@ -15,25 +15,24 @@ const Config: Config = {
         "bg-tablet":"url('/assets/bg-tablet.png')"
 			},
       backgroundColor: {
-        "dark1": "#201F22",
-        "dark2": "#3A393E",
-        "green": '#C1FD35',
-        "gray-1": '#EEEAEA',
-        "gray-2": '#D9D9D9',
-        "error-1": "#EE3737",
-        "error-2": "#E81010",
-        "select-1": "#D2FFEC",
+        "dark1": "#052A2D",
+        "dark2": "#151817",
+        "green": '#0AEB8C',
+        "gray1": '#D2FFEC',
+        "gray2": '#D9D9D9',
+        "error1": "#EE3737",
+        "error2": "#E81010",
         "button1": "#CECECE",
         "black": "#000",
         "white": "#FFF"
       },
 		},
     colors: {
-      "dark1": "#201F22",
-      secondary: "#3A393E",
-      "green": '#C1FD35',
-      "gray1": '#EEEAEA',
-      "gray-2": '#D9D9D9',
+      "dark1": "#052A2D",
+      secondary: "#151817",
+      "green": '#0AEB8C',
+      "gray1": '#D2FFEC',
+      "gray2": '#D9D9D9',
       "error1": "#EE3737",
       "error2": "#E81010",
       "select1": "#D2FFEC",
@@ -41,12 +40,11 @@ const Config: Config = {
       black: "#000",
       white: "#FFF"
     },
-    borderRadius: {
-      "xl": "25px",
-      "2xl": "30px",
-      "md": "5px",
-      "sm": "5px",
-    },
+
+    fontFamily: {
+      "open-sans": "'Open Sans'"
+      },
+      
     screens: {
         sm: "640px",
         md: "768px",

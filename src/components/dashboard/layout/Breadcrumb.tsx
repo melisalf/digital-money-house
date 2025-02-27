@@ -1,0 +1,44 @@
+"use client";
+import Link from "next/link";
+import clsx from "clsx";
+import {usePathname, useRouter} from "next/navigation";
+import ArrowIcon from "@/components/common/Icons/ArrowIcon";
+
+const Breadcrumb = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const menuItems = [
+    { label: "Inicio", path: "/dashboard" },
+    { label: "Actividad", path: "/dashboard/activity" },
+    { label: "Tu perfil", path: "/dashboard/profile" },
+    { label: "Cargar dinero", path: "/dashboard/add-money" },
+    { label: "Cargar dinero - Transferencia bancaria", path: "/dashboard/add-money/bank" },
+    { label: "Cargar dinero - Tarjeta", path: "/dashboard/add-money/card" },
+    { label: "Pagar servicios", path: "/dashboard/pay-services" },
+    { label: "Tarjetas", path: "/dashboard/cards" },
+  ];
+
+  return (
+    <div className=" w-full font-semibold flex flex-col text-left items-start">
+      {menuItems &&
+        menuItems.map((item, index) => (
+          <Link
+            key={`${item.label}-${index}`}
+            href={item.path}
+            className={clsx(" flex flex-row gap-2 items-center", {
+              "block": pathname === item.path,
+              "hidden": pathname !== item.path,
+            })}
+          >
+               <ArrowIcon className="fill-black/70 w-4" />
+               <p className="underline decoration-1 text-base text-dark1 font-semibold ">    {item.label}</p>
+         
+
+          </Link>
+        ))}
+    </div>
+  );
+};
+
+export default Breadcrumb;

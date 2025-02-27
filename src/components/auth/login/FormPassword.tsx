@@ -9,12 +9,15 @@ import { useState } from "react";
 import { useRouter } from "../../../../node_modules/next/navigation";
 import { useEmail } from "@/context/emailContext";
 import { PasswordType } from "@/types/auth.types";
-import { setCookieClient } from "@/utils/cookiesClient";
-import { login } from "@/services/loginService";
+import {login} from "@/services/auth.service";
 import Link from "../../../../node_modules/next/link";
+import Cookies from "js-cookie";
+import { useToken } from "@/context/tokenContext";
 
 export const FormPassword = () => {
   const { email } = useEmail();
+  const {setToken} = useToken();
+  console.log(email);
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -29,35 +32,35 @@ export const FormPassword = () => {
 
   const onSubmit = async (data: PasswordType) => {
     setServerError(null);
-
     const body = { email: email, password: data.password };
     try {
       const loginResponse = await login(body);
+    
+      if (loginResponse?.error) {
+        setServerError("Credenciales incorrectas. Intente nuevamente");
+        return;
+      }
+     
       //si existe el token en la respuesta y no hay error:
-      if (loginResponse.token && !loginResponse.error) {
+      if (loginResponse?.token && !loginResponse.error) {
         //guardamos el token en un cookie que expira en 1 hora.
-        setCookieClient({
-          name: "authToken",
-          value: loginResponse.token,
-          hours: 1,
-        });
+        Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
         //guardamos el token en el localStorage.
-        window.localStorage.setItem(
-          "authToken",
-          JSON.stringify(loginResponse.token)
-        );
+        localStorage.setItem("authToken",loginResponse.token);
+        //guardamos el token en un estado global.
+        // setToken(loginResponse.token);
         //nos redirigimos al home.
+        console.log("Login exitoso");
         //se podria poner un modal con un mensaje de exito y que luego nos redirija
-        router.push("/home");
+        router.push("/dashboard");
       }
-      if (loginResponse.error && loginResponse.status == 401 || 404) {
-        setServerError("Credenciales invalidas. Intenta iniciar nuavamente");
-      }
+     
     } catch (error) {
       setServerError("Ha ocurrido un error. Intenta iniciar nuevamente.");
     }
   };
 
+  
   return (
     <FormProvider {...methods}>
       <form
@@ -85,9 +88,9 @@ export const FormPassword = () => {
           className="w-full  bg-green focus:outline-2 focus:outline-black"
           text={"Continuar"}
         />
-        {serverError && (
+        {serverError &&  (
           <Link href={"/login"}>
-            <p className="w-full max-w-[300px] md:max-w-[360px] flex flex-col text-sm italic text-error1 pt-2 pl-3 m:pl-5 text-center">
+            <p className="w-full max-w-[300px] font-semibold md:max-w-[360px] flex flex-col text-sm italic text-error1 pt-2 pl-3 m:pl-5 text-center">
               {serverError}
             </p>
           </Link>

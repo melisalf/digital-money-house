@@ -5,11 +5,11 @@ import Link from '../../../../node_modules/next/link'
 const RegisterSuccess = () => {
   return (
     <>
-    <main className="w-full flex flex-col items-center gap-6 md:gap-12">
-    <div className="flex flex-col gap-6 md:gap-10 items-center w-80 md:w-full max-w-xl">
+    <main className="w-full flex flex-col items-center gap-6 md:gap-16">
+    <div className="flex flex-col gap-7 items-center w-80 md:w-full max-w-xl">
       <h1 className="text-4xl md:text-[64px] font-semibold md:leading-[90px]">Registro Exitoso</h1>
-      <CheckIcon className="fill-primary" />
-      <p className="text-sm px-8 md:text-base font-normal text-center md:px-12">
+      <CheckIcon className="fill-green" />
+      <p className="text-sm px-8 md:text-base text-center md:px-12">
         Hemos enviado un correo de confirmación para validar tu email, por
         favor revisalo para iniciar sesión.
       </p>

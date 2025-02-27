@@ -14,3 +14,4 @@ export type NewTransactionType = {
   dated: "string";
   description: "string";
 };
+

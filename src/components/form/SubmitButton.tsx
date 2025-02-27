@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import SVGSpinner from "../common/Icons/SVGSpinner";
+import SVGSpinner from "../common/Icons/SpinnerIcon";
 
 type SubmitButtonProps = {
   text: string;
@@ -15,7 +15,7 @@ const SubmitButton = ({
   onClick,
 }: SubmitButtonProps) => {
   return (
-    <div className="w-full rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)]">
+    <div className="w-full h-[50px] md:h-[64px] rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)]">
     
     <button
     type="submit"

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
@@ -24,7 +23,7 @@ export const FormEmail = () => {
     formState: { errors },
   } = methods;
 
-  const onSubmitEmail = (data: EMailType) => {
+  const onSubmitEmail = (data: any) => {
     console.log("Correo:", data.email);
     setEmail(data.email); // Guardamos el correo en el estado global
     localStorage.setItem("email", data.email);
@@ -39,7 +38,7 @@ export const FormEmail = () => {
         onSubmit={handleSubmit(onSubmitEmail)}
       >
         <InputText
-          inputClassName="h-[64px]"
+          inputClassName=""
           type="email"
           autoComplete="off"
           placeholder="Correo electrónico"
