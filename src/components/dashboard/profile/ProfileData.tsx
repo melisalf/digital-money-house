@@ -2,6 +2,8 @@
 
 import EditUserIcon from "@/components/common/Icons/EditUserIcon";
 import { UserDataType } from "@/types/user.types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 
 type ProfileDataProps = {
@@ -10,7 +12,20 @@ type ProfileDataProps = {
 };
 
 const ProfileData = ({ userData, token }: ProfileDataProps) => {
-  console.log(userData);
+
+  const ProfileFormMethods = useForm<UserDataType>({
+    resolver: yupResolver(ProfileSchema),
+    defaultValues: userData ?? {},
+    mode: "onBlur",
+  });
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+  } = ProfileFormMethods;
+
+
   const formatUserData = [
     { label: "Email", fieldName: userData.email, type: "text", edit: false },
     {
@@ -40,7 +55,7 @@ const ProfileData = ({ userData, token }: ProfileDataProps) => {
   };
 
   return (
-    <section className="w-full justify-start items-start p-5 md:p-8 xl:px-10 flex flex-col  rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+    <section className="w-full justify-start items-start p-5 md:p-8 xl:pt-6 xl:pb-8 xl:px-10 flex flex-col  rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
       <h2 className="w-full text-xl font-bold text-dark1  pb-4 border-b border-gray1 md:border-dark1/0 xl:pb-2  ">
         Tus datos
       </h2>
@@ -48,7 +63,7 @@ const ProfileData = ({ userData, token }: ProfileDataProps) => {
       {formatUserData &&
         formatUserData.map((field) => (
           <div
-            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center py-2 border-b border-dark1/30 md:border-dark1/50"
+            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center pt-2 pb-1 border-b border-dark1/30 md:border-dark1/50"
             key={field.label}
           >
             {/* label */}
