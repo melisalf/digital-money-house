@@ -48,7 +48,7 @@ const ProfileData = ({ userData, token }: ProfileDataProps) => {
       {formatUserData &&
         formatUserData.map((field) => (
           <div
-            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center py-2 border-b border-gray1 md:border-dark1/50"
+            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center py-2 border-b border-dark1/30 md:border-dark1/50"
             key={field.label}
           >
             {/* label */}

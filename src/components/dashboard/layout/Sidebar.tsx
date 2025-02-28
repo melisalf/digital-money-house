@@ -29,7 +29,7 @@ const Sidebar = () => {
         <Link
           key={`${item.name}-${index}`}
           href={item.path}
-          className={clsx("text-[17px] text-dark1", {
+          className={clsx("text-[17px] text-dark1 hover:text-[18px]", {
             "font-extrabold": pathname === item.path,
             "font-semibold": pathname !== item.path,
           })}
@@ -40,7 +40,7 @@ const Sidebar = () => {
 
       <button
         onClick={logoutHandle}
-        className="text-[17px] font-semibold text-dark1/50"
+        className="text-[17px] font-semibold text-dark1/50 hover:text-[18px]"
       >
         Cerrar sesion
       </button>

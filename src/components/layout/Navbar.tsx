@@ -45,7 +45,7 @@ export default function Navbar({
     <>
       <header
         className={clsx(
-          "px-5 py-3 h-[64px] flex flex-row justify-between items-center",
+          "p-5 h-[64px] flex flex-row justify-between items-center",
           navbarClassName
         )}
       >
@@ -72,8 +72,8 @@ export default function Navbar({
               </Link>
             ))}
           {isLogged && userName && (
-            <div className="flex flex-row justify-center items-center gap-5">
-              <div className="flex items-center justify-center px-2 py-1 md:p-2 bg-green rounded-xl">
+            <div className="flex flex-row justify-center items-center gap-3">
+              <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
                 <span className="text-base md:text-xl font-bold text-dark1">
                   {userName
                     .split(" ")

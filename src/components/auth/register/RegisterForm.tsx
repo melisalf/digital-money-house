@@ -22,6 +22,8 @@ const RegisterForm = () => {
     reset,
   } = RegisterFormMethods;
 
+  
+
   const onSubmitRegister = async (data: RegisterFormType) => {
     try {
       setServerError(null);

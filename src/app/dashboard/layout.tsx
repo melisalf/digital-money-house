@@ -32,7 +32,7 @@ export default async function DashboardLayout({
           <Sidebar></Sidebar>
         </aside>
 
-        <div className=" w-full gap-5 md:px-12 md:py-16 xl:px-20 xl:py-10 flex-col flex">
+        <div className=" w-full gap-5 md:px-12 md:py-14 xl:px-20 xl:py-10 flex-col flex">
           <div className="w-full flex md:hidden">
             <Breadcrumb />
           </div>

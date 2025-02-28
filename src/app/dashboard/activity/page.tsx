@@ -1,22 +1,24 @@
-import TransactionsList from '@/components/dashboard/home/TransactionsList'
-import { getAccount } from '@/services/account.service';
-import { getAllTransactions } from '@/services/transactions.service';
-import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
-import React from 'react'
+import { getAllTransactions } from "@/services/transactions.service";
+import TransactionsList from "@/components/dashboard/home/TransactionsList";
+import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
+import { getAccount } from "@/services/account.service";
 
+const ActivityPage = async () => {
+  const token = getTokenFromCookie();
+  const accountData = await getAccount(token);
+  const transactionsList = await getAllTransactions(token, accountData.id);
 
-
-const ActivityPage =  () => {
-
-	const showActivityPage = true;
-
+  const showActivityPage = true; // Modo lista completa
+  const orderAllTransactions = transactionsList.toReversed()
 
   return (
-    <div>
+    <>
       <TransactionsList
-      showActivityPage={showActivityPage} />
-    </div>
-  )
-}
+        transactionsList={orderAllTransactions}
+        showActivityPage={showActivityPage}
+      />
+    </>
+  );
+};
 
-export default ActivityPage
+export default ActivityPage;

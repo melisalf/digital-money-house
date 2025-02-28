@@ -11,18 +11,18 @@ export default async function DashboardPage() {
   const transactionsList = await getAllTransactions(token, accountData.id);
 
   // TRUE cuando esta en true la lista de transacciones tiene paginacion y filtros.
-// FALSE cuando esta en false la lista de transacciones se reduce a las 10 ultimas y boton de "ver toda tu actividad"
-  const showActivityPage = false;
+  // FALSE cuando esta en false la lista de transacciones se reduce a las 10 ultimas y boton de "ver toda tu actividad"
 
+  const showActivityPage = false; // Modo resumen
+  const orderLatestTransactions = transactionsList.toReversed().slice(0, 10); // Últimas 10
 
   return (
     <>
       <Balance available_amount={accountData.available_amount} />
       <Actions />
       <TransactionsList
-        transactionsList={transactionsList}
+        transactionsList={orderLatestTransactions}
         showActivityPage={showActivityPage}
-     
       />
     </>
   );

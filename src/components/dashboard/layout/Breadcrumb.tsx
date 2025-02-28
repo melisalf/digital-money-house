@@ -13,8 +13,8 @@ const Breadcrumb = () => {
     { label: "Actividad", path: "/dashboard/activity" },
     { label: "Tu perfil", path: "/dashboard/profile" },
     { label: "Cargar dinero", path: "/dashboard/add-money" },
-    { label: "Cargar dinero - Transferencia bancaria", path: "/dashboard/add-money/bank" },
-    { label: "Cargar dinero - Tarjeta", path: "/dashboard/add-money/card" },
+    { label: "Cargar dinero", path: "/dashboard/add-money/bank" },
+    { label: "Cargar dinero", path: "/dashboard/add-money/card" },
     { label: "Pagar servicios", path: "/dashboard/pay-services" },
     { label: "Tarjetas", path: "/dashboard/cards" },
   ];
