@@ -16,6 +16,9 @@ const AddMoneyCardPage = async () => {
   // FALSE cuando esta en false se muestran todas las tarjetas con un delete.
   const showAddMoneyPage = true;
 
+ 
+
+
   return (
       <section className="flex flex-col gap-5">
         <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] px-5 py-4 md:px-12 md:py-12">
@@ -56,7 +59,8 @@ const AddMoneyCardPage = async () => {
         </div>
         
         <div className="w-full h-[50px] flex justify-end md:hidden items-center ">
-            <button className="w-1/2  p-5 bg-green font-bold text-center items-center text-dark1 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)]">
+            <button 
+            className="w-1/2  p-5 bg-green font-bold text-center items-center text-dark1 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)]">
               Continuar
             </button>
         </div>

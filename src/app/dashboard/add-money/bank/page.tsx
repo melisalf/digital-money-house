@@ -1,6 +1,5 @@
-import AliasAndCvu from '@/components/dashboard/profile/AliasAndCvu1'
+import AliasAndCvu from '@/components/dashboard/profile/AliasAndCvu'
 import { getAccount } from '@/services/account.service';
-import { getUser } from '@/services/user.service';
 import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
 import React from 'react'
 

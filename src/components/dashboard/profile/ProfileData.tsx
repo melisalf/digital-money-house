@@ -2,8 +2,6 @@
 
 import EditUserIcon from "@/components/common/Icons/EditUserIcon";
 import { UserDataType } from "@/types/user.types";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 
 
 type ProfileDataProps = {
@@ -12,19 +10,6 @@ type ProfileDataProps = {
 };
 
 const ProfileData = ({ userData, token }: ProfileDataProps) => {
-
-  const ProfileFormMethods = useForm<UserDataType>({
-    resolver: yupResolver(ProfileSchema),
-    defaultValues: userData ?? {},
-    mode: "onBlur",
-  });
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue,
-  } = ProfileFormMethods;
-
 
   const formatUserData = [
     { label: "Email", fieldName: userData.email, type: "text", edit: false },

@@ -1,4 +1,5 @@
 "use client";
+import InputRadius from "@/components/form/InputRadius";
 import { deleteCardId } from "@/services/cards.service";
 import { CardType } from "@/types/card.types";
 import { useRouter } from "next/navigation";
@@ -19,12 +20,17 @@ const UserCards = ({
 }: CardsListProps) => {
   const [cards, setCards] = useState(cardsList);
   const router = useRouter();
+  const [ selectedCardId, setSelectedCardId ] = useState<number | null>(null);
+
+
+  const handleSelect = (card_Id: number) => {
+    setSelectedCardId(card_Id);
+  };
 
   const handleDelete = async (card_id: number) => {
     try {
-      console.log("🟡 Intentando eliminar tarjeta con ID:", card_id);
+      console.log("Intentando eliminar tarjeta con ID:", card_id);
       await deleteCardId(accountId, card_id, token);
-      console.log("🟢 Eliminación exitosa. Actualizando estado...");
 
       // Filtramos la tarjeta eliminada del estado
       setCards((prevCards) => prevCards.filter((card) => card.id !== card_id));
@@ -32,7 +38,7 @@ const UserCards = ({
 
       toast.success("Tarjeta eliminada con éxito");
     } catch (error) {
-      console.error("❌ Error al eliminar la tarjeta:", error);
+      console.error("Error al eliminar la tarjeta:", error);
       toast.error("Error al eliminar la tarjeta");
     }
   };
@@ -75,6 +81,21 @@ const UserCards = ({
                     </button>
                   </div>
                 )}
+
+                {showAddMoneyPage && (
+                    <div className=" flex items-center relative">
+                    <input
+                      type="radio"
+                      name="selectedCard"
+                      value={card.number_id}
+                      checked={selectedCardId === card.number_id}
+                      onChange={() => handleSelect(card.number_id)}
+                    className="w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark1 checked:bg-green checked:border-2 
+                        rounded-full border-opacity-50 relative"
+                    />              
+                  </div>
+
+                ) }
               </li>
             ))}
           </ul>
