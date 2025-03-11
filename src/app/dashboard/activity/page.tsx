@@ -1,5 +1,5 @@
 import { getAllTransactions } from "@/services/transactions.service";
-import TransactionsList from "@/components/dashboard/home/TransactionsList";
+import TransactionsList from "@/components/dashboard/activity/TransactionsList";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 import { getAccount } from "@/services/account.service";
 

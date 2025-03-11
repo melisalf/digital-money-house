@@ -8,14 +8,15 @@ const NewCardPage =  async () => {
  
   const token = getTokenFromCookie();
   const accountData = await getAccount(token);
-  const accountId = accountData.id;
-  const cardsList = await getAllCards(accountId, token);
+
+
 
   return (
     <div>
       <AddCard
-      accountId={accountId}
-      cardsList={cardsList}/>
+      accountId={accountData.id}
+      token = {token}
+      />
 
     </div>
   )

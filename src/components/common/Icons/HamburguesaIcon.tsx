@@ -20,8 +20,8 @@ const HamburguesaIcon = ({ className }: HamburguesaIconProps) => {
           x2="31"
           y2="2"
           stroke="#0AEB8C"
-          stroke-width="4"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeLinecap="round"
         />
         <line
           x1="2"
@@ -29,8 +29,8 @@ const HamburguesaIcon = ({ className }: HamburguesaIconProps) => {
           x2="31"
           y2="13"
           stroke="#0AEB8C"
-          stroke-width="4"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeLinecap="round"
         />
         <line
           x1="2"
@@ -38,8 +38,8 @@ const HamburguesaIcon = ({ className }: HamburguesaIconProps) => {
           x2="31"
           y2="24"
           stroke="#0AEB8C"
-          stroke-width="4"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeLinecap="round"
         />
       </svg>
   );

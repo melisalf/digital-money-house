@@ -15,7 +15,7 @@ const SearchIcon = () => {
           <path
             d="M1.19922 1L5.71945 6.11909"
             stroke="#828282"
-            stroke-width="1.5"
+            strokeWidth="1.5"
           />
         </svg>
       </div>

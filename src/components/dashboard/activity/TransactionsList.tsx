@@ -4,7 +4,6 @@ import Link from "next/link";
 import ArrowIcon from "@/components/common/Icons/ArrowIcon";
 import { TransactionType } from "@/types/transaction.types";
 import useTransactions from "@/hooks/useTransactions";
-import { useEffect, useState } from "react";
 import FilterIcon from "@/components/common/Icons/FilterIcon";
 
 type TransactionsListProps = {
@@ -106,14 +105,14 @@ const TransactionsList = ({
         )}
 
         {showActivityPage && totalPages > 1 && (
-          <div className="w-full flex justify-center mt-5 space-x-2">
+          <div className="w-full flex justify-center mt-10 md:mt-5 gap-5">
             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
               (page) => (
                 <button
                   key={page}
-                  className={` text-base text-dark1 font-bold transition-all ${
+                  className={` text-base text-dark1 font-bold transition-all px-3 md:py-1.5 py-1 ${
                     page === currentPage
-                      ? "bg-gray1"
+                      ? "bg-gray1 rounded-[8px] md:bg-button1 md:rounded-none "
                       : "bg-white"
                   }`}
                   onClick={() => changePage(page)}

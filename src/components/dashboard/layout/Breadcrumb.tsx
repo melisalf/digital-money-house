@@ -17,6 +17,7 @@ const Breadcrumb = () => {
     { label: "Cargar dinero", path: "/dashboard/add-money/card" },
     { label: "Pagar servicios", path: "/dashboard/pay-services" },
     { label: "Tarjetas", path: "/dashboard/cards" },
+    { label: "Tarjetas", path: "/dashboard/cards/new-card" },
   ];
 
   return (
@@ -26,8 +27,8 @@ const Breadcrumb = () => {
           <Link
             key={`${item.label}-${index}`}
             href={item.path}
-            className={clsx(" flex flex-row gap-2 items-center", {
-              "block": pathname === item.path,
+            className={clsx(" flex flex-row gap-2", {
+              "block": pathname === item.path || pathname.includes(item.path),
               "hidden": pathname !== item.path,
             })}
           >

@@ -40,15 +40,15 @@ const ProfileData = ({ userData, token }: ProfileDataProps) => {
   };
 
   return (
-    <section className="w-full justify-start items-start p-5 md:p-8 xl:pt-6 xl:pb-8 xl:px-10 flex flex-col  rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
-      <h2 className="w-full text-xl font-bold text-dark1  pb-4 border-b border-gray1 md:border-dark1/0 xl:pb-2  ">
+    <section className="w-full justify-start items-start px-5 pt-5 pb-8 md:p-8 xl:pt-6 xl:pb-8 xl:px-10 flex flex-col  rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+      <h2 className="w-full text-xl font-bold text-dark1  pb-4 border-b border-dark1/30 md:border-dark1/0 xl:pb-2  ">
         Tus datos
       </h2>
 
       {formatUserData &&
         formatUserData.map((field) => (
           <div
-            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center pt-2 pb-1 border-b border-dark1/30 md:border-dark1/50"
+            className="w-full flex flex-col md:flex-row justify-between items-start md:gap-5 md:items-center py-1 border-b border-dark1/30 md:border-dark1/50"
             key={field.label}
           >
             {/* label */}

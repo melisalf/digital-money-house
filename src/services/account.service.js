@@ -4,7 +4,6 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 // GET Find acoount by user_id in the token.
 
 export const getAccount= async (token) => {
-    console.log(token);
     try {
         const response = await fetch(`${BASE_URL}/account`, {
             method: "GET",

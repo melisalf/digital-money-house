@@ -1,16 +1,16 @@
 const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 
-// GET all cards by accountId
+// GET all cards by account_id
 
-export const getAllCards = async ( accountId, token) => {
-  console.log( accountId, token)
+export const getAllCards = async ( account_id, token) => {
+  console.log( account_id, token)
     try {
 
-      if (!token || !accountId) {
-        throw new Error("Token o accountId no válidos");
+      if (!token || !account_id) {
+        throw new Error("Token o account_id no válidos");
       }
   
-      const response = await fetch(`${BASE_URL}/accounts/${accountId}/cards`, {
+      const response = await fetch(`${BASE_URL}/accounts/${account_id}/cards`, {
         method: "GET",
         headers: {
           Authorization: `${token}`,
@@ -35,7 +35,39 @@ export const getAllCards = async ( accountId, token) => {
   }; 
 
 // GET card by Id
-export const getCardId = async () => {}
+export const getCardId = async (account_id, card_id, token) => {
+  try {
+    if (!token || !account_id) {
+      throw new Error("Token o account_id no válidos");
+    }
+    
+    console.log("🔹 Enviando GET request a la API...");
+    console.log(`URL: ${BASE_URL}/accounts/${account_id}/cards/${card_id}`);
+    console.log("Token:", token);
+
+    const response = await fetch(`${BASE_URL}/accounts/${account_id}/cards/${card_id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("🔹 Respuesta de la API:", response);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("⚠️ Error en la respuesta de la API:", errorData);
+      throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo seleccionar la tarjeta"}`);
+    }
+
+    console.log("✅ Tarjeta seleccionada correctamente");
+
+  } catch (error) {
+    console.error("Error select card:", error);
+    throw error;
+  }
+}
 
 
 // POST 
@@ -45,17 +77,17 @@ export const newCard = async () => {}
 
 // DELETE 
 
-export const deleteCardId = async (accountId, card_id, token) => {
+export const deleteCardId = async (account_id, card_id, token) => {
   try {
-    if (!token || !accountId) {
-      throw new Error("Token o accountId no válidos");
+    if (!token || !account_id) {
+      throw new Error("Token o account_id no válidos");
     }
     
     console.log("🔹 Enviando DELETE request a la API...");
-    console.log(`URL: ${BASE_URL}/accounts/${accountId}/cards/${card_id}`);
+    console.log(`URL: ${BASE_URL}/accounts/${account_id}/cards/${card_id}`);
     console.log("Token:", token);
 
-    const response = await fetch(`${BASE_URL}/accounts/${accountId}/cards/${card_id}`, {
+    const response = await fetch(`${BASE_URL}/accounts/${account_id}/cards/${card_id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `${token}`,

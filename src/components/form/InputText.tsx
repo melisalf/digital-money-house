@@ -6,7 +6,7 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   errorText?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   inputClassName?: string;
-  value?: string;
+  value?: string | readonly string[] | number | undefined;
   type?: "text" | "email" | "password" | "number" | "tel" | "url";
 }
 

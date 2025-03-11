@@ -14,9 +14,9 @@ const ErrorIcon = () => {
           <path
             d="M2 2L21 21"
             stroke="#E81010"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -31,9 +31,9 @@ const ErrorIcon = () => {
           <path
             d="M2 21L21 2"
             stroke="#E81010"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
