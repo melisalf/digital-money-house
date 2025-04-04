@@ -29,7 +29,7 @@ const InputText = ({
         placeholder={placeholder}
         {...props}
         className={clsx(
-          "w-full h-[50px] md:h-[64px] p-5 text-base md:text-[18px] border-dark1 bg-white text-black rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] outline-none transition-all focus:border-gray1 focus:ring-0",
+          "w-full h-[50px] md:h-[64px] p-5 text-base md:text-[18px] bg-white text-black/50 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] outline-none transition-all focus:border-gray1 focus:ring-0",
           hasError 
             ? "border border-error1 focus:outline-error1"
             : "border-gray1 focus:outline-gray1 focus:right-0",

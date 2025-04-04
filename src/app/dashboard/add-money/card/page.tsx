@@ -1,4 +1,4 @@
-import AddMoneyCard from "@/components/dashboard/addMoney/AddMoneyCard";
+import SelectCard from "@/components/dashboard/addMoney/SelectCard";
 import { getAccount } from "@/services/account.service";
 import { getAllCards } from "@/services/cards.service";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
@@ -14,7 +14,7 @@ const AddMoneyCardPage = async () => {
   const showAddMoneyPage = true;
 
   return (
-    <AddMoneyCard
+    <SelectCard
       cardsList={cardsList}
       accountId={accountId}
       showAddMoneyPage={showAddMoneyPage}

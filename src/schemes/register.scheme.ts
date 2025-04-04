@@ -15,7 +15,7 @@ export const RegisterScheme = yup
     dni: yup
       .string()
       .required("El campo es requerido")
-      .matches(/^[0-9]{8}$/, "DNI inválido"),
+      .matches(/^[0-9]{8}$/, "El campo solo puede contener números"),
     email: yup
       .string()
       .required("El campo es requerido")

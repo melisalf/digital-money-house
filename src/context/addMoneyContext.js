@@ -5,9 +5,10 @@ export const useSelectCard = create(set => ({
   setCardId: cardId => set({cardId}),
 }))
 
-export const useAmount = create(set => ({
+export const useSetAmount = create(set => ({
     amount: 0,
     setAmount: amount => set({amount}),
   }))
   
 
+  

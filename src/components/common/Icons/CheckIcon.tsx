@@ -7,8 +7,6 @@ const CheckIcon = ({ className }: CheckIconProps) => {
     <div data-svg-wrapper className="relative">
       <svg
         className={className}
-        width="92"
-        height="95"
         viewBox="0 0 92 95"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

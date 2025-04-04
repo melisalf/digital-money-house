@@ -17,13 +17,15 @@ const TransactionsList = ({
 }: TransactionsListProps) => {
   const {
     searchTerm,
-    setSearchTerm,
-    handleSearch,
+    handleSearchKeyDown,
+    handleSearchChange,
     currentPage,
     changePage,
     paginatedTransactions,
     totalPages,
-  } = useTransactions(transactionsList);
+  } = useTransactions(transactionsList, showActivityPage);
+
+  console.log(searchTerm);
 
   const getWeekday = (dateString: string): string => {
     const date = new Date(dateString);
@@ -41,8 +43,8 @@ const TransactionsList = ({
             type="text"
             placeholder="Buscar en tu actividad"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleSearch}
+            onChange={handleSearchChange}
+            onKeyDown={handleSearchKeyDown}
           />
         </div>
 

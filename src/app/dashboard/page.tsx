@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   // TRUE cuando esta en true la lista de transacciones tiene paginacion y filtros.
   // FALSE cuando esta en false la lista de transacciones se reduce a las 10 ultimas y boton de "ver toda tu actividad"
 
-  const showActivityPage = false; // Modo resumen
+  const showActivityPage = false; // Lista de las últimas 10 transacciones.
   const orderLatestTransactions = transactionsList.toReversed().slice(0, 10); // Últimas 10
 
   return (

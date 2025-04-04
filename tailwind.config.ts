@@ -33,7 +33,6 @@ const Config: Config = {
       "gray1": '#D2FFEC',
       "error1": "#EE3737",
       "error2": "#E81010",
-      "select1": "#D2FFEC",
       "button1": "#CECECE",
       black: "#000",
       white: "#FFF"

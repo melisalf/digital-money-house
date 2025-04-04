@@ -31,7 +31,7 @@ export default function Navbar({
   isLogged,
   userName,
 }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const openMobileMenu = () => {
     setIsOpen(true);
@@ -122,7 +122,9 @@ export default function Navbar({
               </p>
             </div>
             <aside className="flex flex-col grow ">
-              <Sidebar />
+              <Sidebar
+              isOpen = {isOpen}
+              setIsOpen = {setIsOpen} />
             </aside>
           </div>
         </>

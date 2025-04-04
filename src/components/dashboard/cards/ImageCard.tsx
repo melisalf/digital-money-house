@@ -11,7 +11,7 @@ interface ImageCardProps {
 
 export default function ImageCard({number, expiry, cvc, name}: ImageCardProps) {
 	return (
-		<div className="shadow-md rounded-[14.5px]">
+		<div className="shadow-md rounded-[15px] mb-3">
 			<Cards number={number} expiry={expiry} cvc={cvc} name={name} />
 		</div>
 	);

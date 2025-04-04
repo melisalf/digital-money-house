@@ -3,7 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { EmailScheme } from "@/schemes/loginScheme";
+import { EmailScheme } from "@/schemes/login.scheme";
 import InputText from "@/components/form/InputText";
 import SubmitButton from "@/components/form/SubmitButton";
 import { useRouter } from "next/navigation";

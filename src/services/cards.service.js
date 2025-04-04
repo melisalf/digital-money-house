@@ -72,7 +72,40 @@ export const getCardId = async (account_id, card_id, token) => {
 
 // POST 
 
-export const newCard = async () => {}
+export const newCard = async (account_id, token, data) => {
+  try {
+    if (!token || !account_id) {
+      throw new Error("Token o account_id no válidos");
+    }
+    
+    console.log("🔹 Enviando POST request a la API...");
+    console.log(`URL: ${BASE_URL}/accounts/${account_id}/cards`);
+    console.log("Token:", token);
+
+    const response = await fetch(`${BASE_URL}/accounts/${account_id}/cards`, {
+      method: 'POST',
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("🔹 Respuesta de la API:", response);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("⚠️ Error en la respuesta de la API:", errorData);
+      throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo agregar la tarjeta"}`);
+    }
+
+    console.log("✅ Tarjeta agregada con exito");
+
+  } catch (error) {
+    console.error("Error new card:", error);
+    throw error;
+  }
+}
 
 
 // DELETE 

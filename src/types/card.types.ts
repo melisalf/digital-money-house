@@ -15,10 +15,3 @@ export type CardBodyType = {
 };
 
 
-export type CardFormType = {
-  cod: string;
-  expiration_date: string;
-  first_last_name: string;
-  number_id: string;
-};
-

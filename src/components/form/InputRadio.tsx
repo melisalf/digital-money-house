@@ -33,7 +33,7 @@ const InputRadio = ({
         value={value}
         onChange={onChange}
         className={clsx(
-          "w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark1 checked:bg-green checked:border-2 rounded-full border-opacity-50 relative",
+          "w-4 h-4 border border-dark1 rounded-full appearance-none checked:bg-green checked:border-dark2 checked:after:bg-black checked:after:rounded-full checked:after:w-2 checked:after:h-2 relative cursor-pointer checked:after:block checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:transform checked:after:-translate-x-1/2 checked:after:-translate-y-1/2",
           inputClassName
         )}
         checked={checked}

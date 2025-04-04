@@ -4,7 +4,12 @@ import Link from "next/link";
 import clsx from "clsx";
 import {usePathname, useRouter} from "next/navigation";
 
-const Sidebar = () => {
+type SidebarProps = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  
+}
+const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
   const pathname = usePathname();
   const router = useRouter();
 

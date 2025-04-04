@@ -12,6 +12,10 @@ export default async function CardsPage() {
   const accountId = accountData.id;
   const cardsList = await getAllCards(accountId, token);
 
+  
+  const countCards = cardsList.length + 1
+  console.log(countCards)
+
   // TRUE cuando esta en true se muestran todas las tarjetas con un select.
   // FALSE cuando esta en false se muestran todas las tarjetas con un delete.
   const showAddMoneyPage = false;

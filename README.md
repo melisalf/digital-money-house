@@ -1,6 +1,6 @@
 # 💰 Digital Money House
 
-![Portada](Cover.png)
+![Portada](/public/assets/cover.png)
 
 1. [Descripción](#descripción)
 2. [Tecnologías Utilizadas](#tecnologías-utilizadas)

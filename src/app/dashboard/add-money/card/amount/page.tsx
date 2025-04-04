@@ -1,12 +1,16 @@
-import AddMoneyAmount from '@/components/dashboard/addMoney/AddMoneyAmount'
+import CheckAddMoney from '@/components/dashboard/addMoney/checkAddMoney'
+import SetAmount from '@/components/dashboard/addMoney/SetAmount'
 import React from 'react'
 
-const AddAmountPage = () => {
-
+const SetAmountPage = () => {
   return (
-    <AddMoneyAmount
-    />
+    <div>
+
+        
+        <SetAmount/>
+     
+    </div>
   )
 }
 
-export default AddAmountPage
+export default SetAmountPage

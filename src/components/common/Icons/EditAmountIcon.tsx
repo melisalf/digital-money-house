@@ -1,7 +1,12 @@
 import React from "react";
 
-const EditAmountIcon = () => {
-  return +(
+interface EditAmountIconProps  {
+  className?: string;
+  onClick?: () => void;
+};
+
+const EditAmountIcon = ({ onClick, className }: EditAmountIconProps) => {
+  return (
     <div data-svg-wrapper className="relative">
       <svg
         width="30"
@@ -9,6 +14,8 @@ const EditAmountIcon = () => {
         viewBox="0 0 30 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        onClick={onClick}
       >
         <g clipPath="url(#clip0_1623_2796)">
           <path
