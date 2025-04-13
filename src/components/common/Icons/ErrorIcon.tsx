@@ -1,6 +1,9 @@
-import React from "react";
 
-const ErrorIcon = () => {
+type ErrorIconProps = {
+  className?: string;
+};
+
+const ErrorIcon = ({className}: ErrorIconProps) => {
   return (
     <div className="w-[65px] h-[65px] relative">
       <div data-svg-wrapper className="left-[23px] top-[23px] absolute">
@@ -10,6 +13,7 @@ const ErrorIcon = () => {
           viewBox="0 0 23 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className={className}
         >
           <path
             d="M2 2L21 21"

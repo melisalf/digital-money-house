@@ -23,9 +23,9 @@ const useTransactions = (
 
   // Filtrar transacciones por búsqueda
   useEffect(() => {
+    const searchQuery = searchParams.get("search") || "";
+    setSearchTerm(searchQuery);
     if (showActivityPage) {
-      const searchQuery = searchParams.get("search") || "";
-      setSearchTerm(searchQuery);
       const filtered = allTransactions.filter((t) =>
         t.description.toLowerCase().includes(searchTerm.toLowerCase())
       );

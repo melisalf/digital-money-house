@@ -1,9 +1,19 @@
-import React from 'react'
+import ServicesList from "@/components/dashboard/payServices/ServicesList";
+import { getAllServices } from "@/services/services.service";
 
-const PayServicesPage = () => {
+const PayServicesPage = async () => {
+
+  const servicesList = await getAllServices();
+  console.log(servicesList);
+  const showServicePage = true;
+
   return (
-    <div className='h-full'
-    >PayServicesPage</div>
+    <div className='h-full'>
+      <ServicesList
+      servicesList= {servicesList}
+      showServicePage= {showServicePage}
+      />
+    </div>
   )
 }
 

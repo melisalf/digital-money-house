@@ -24,12 +24,6 @@ type CardFormData = {
   securityCode: string;
 };
 
-const cardValues = {
-  numberCard: "4556365487965698",
-  nameTitular: "MELISA LUCIA FERRARIS",
-  expirationDate: "1028",
-  securityCode: "265",
-};
 
 const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
   const router = useRouter();

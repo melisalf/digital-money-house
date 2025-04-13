@@ -1,9 +1,7 @@
 "use client";
-import { useSetAmount } from "@/context/addMoneyContext";
+import { useSetAmount } from "@/context/moneyContext";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
 import { toast, Toaster } from "sonner";
 
 

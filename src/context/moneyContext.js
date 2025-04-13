@@ -9,6 +9,11 @@ export const useSetAmount = create(set => ({
     amount: 0,
     setAmount: amount => set({amount}),
   }))
-  
+
+
+  export const useSelectService = create(set => ({
+    serviceId: 0,
+    setServiceId: serviceId => set({serviceId}),
+  }))
 
   

@@ -19,6 +19,9 @@ const Breadcrumb = () => {
     { label: "Cargar dinero", path: "/dashboard/add-money/card/amount/checked" },
     { label: "Cargar dinero", path: "/dashboard/add-money/card/amount/checked/success" },
     { label: "Pagar servicios", path: "/dashboard/pay-services" },
+    { label: "Pagar servicios", path: "/dashboard/pay-services/account" },
+    { label: "Pagar servicios", path: "/dashboard/pay-services/account/ckecked" },
+    { label: "Pagar servicios", path: "/dashboard/pay-services/account/ckecked/success" },
     { label: "Tarjetas", path: "/dashboard/cards" },
     { label: "Tarjetas", path: "/dashboard/cards/new-card" },
   ];

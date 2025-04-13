@@ -33,7 +33,32 @@ export const getAllTransactions = async (token, account_id) => {
 
 // GET transaction by Id
 
-export const getTransactionId = async () => {
+export const getTransactionId = async (token, account_id, transaction_id) => {
+  try {
+    if (!token || !account_id) {
+      throw new Error("Token o account_id no válidos");
+    }
+
+    const response = await fetch(`${BASE_URL}/accounts/${account_id}/transactions/${transaction_id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      throw new Error(`Error ${response.status}: ${errorDetails.message}`);
+    }
+
+    const transaction = await response.json();
+    return transaction;
+
+  } catch (error) {
+    console.error("Error fetching transactionById:", error.message);
+    return [];
+  }
 }
 
 

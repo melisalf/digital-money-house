@@ -25,7 +25,6 @@ const TransactionsList = ({
     totalPages,
   } = useTransactions(transactionsList, showActivityPage);
 
-  console.log(searchTerm);
 
   const getWeekday = (dateString: string): string => {
     const date = new Date(dateString);
@@ -65,9 +64,10 @@ const TransactionsList = ({
         {paginatedTransactions.length === 0 ? (
           <p className="text-gray-500 mt-4">No hay movimientos en tu cuenta.</p>
         ) : (
-          <ul className="w-full">
+          <div className="w-full">
             {paginatedTransactions.map((transaction) => (
-              <li
+              <Link
+                href={`/dashboard/activity/${transaction.id}`}
                 className="w-full flex flex-row justify-between items-start md:items-center border-b border-gray1 md:border-dark1 py-3 md:py-4"
                 key={transaction.id}
               >
@@ -89,9 +89,9 @@ const TransactionsList = ({
                     {getWeekday(transaction.dated)}
                   </span>
                 </div>
-              </li>
+              </Link>
             ))}
-          </ul>
+          </div>
         )}
 
         {!showActivityPage && (

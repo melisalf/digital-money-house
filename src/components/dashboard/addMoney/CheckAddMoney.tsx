@@ -1,6 +1,6 @@
 "use client";
 import EditAmountIcon from "@/components/common/Icons/EditAmountIcon";
-import { useSetAmount } from "@/context/addMoneyContext";
+import { useSetAmount } from "@/context/moneyContext";
 import { AccountType } from "@/types/account.types";
 import { useRouter } from "next/navigation";
 import { newDeposit } from "@/services/transferences.service";
@@ -23,8 +23,8 @@ const CheckAddMoney = ({ accountData, token }: CheckAddMoneyProps) => {
       const body = {
         amount: Number(amount),
         dated: new Date().toISOString(),
-        origin: "origin",
-        destination: "destination",
+        origin: "Cuenta propia",
+        destination: "Mi cuenta",
       } ;  
 
       if(body) {

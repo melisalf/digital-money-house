@@ -1,6 +1,6 @@
 "use client";
 import CheckIcon from "@/components/common/Icons/CheckIcon";
-import { useSelectCard, useSetAmount } from "@/context/addMoneyContext";
+import { useSelectCard, useSetAmount } from "@/context/moneyContext";
 import { AccountType } from "@/types/account.types";
 import { formatDated } from "@/utils/formatDated";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,6 @@ const SuccessAddMoney = ({ accountData}: SuccessAddMoneyProps) => {
 
   const handlePushToDashboard = () => {
     router.push("/dashboard");
-	setAmount(0);
 	setCardId(0);
   };
 
