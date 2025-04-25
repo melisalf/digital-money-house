@@ -7,11 +7,13 @@ import { useRouter } from "next/navigation";
 
 type SuccessAddMoneyProps = {
   accountData: AccountType;
+  showAddMoneyPage?: boolean;
+  showPayServicePage?: boolean;
 };
 
-const SuccessAddMoney = ({ accountData}: SuccessAddMoneyProps) => {
-  const { amount, setAmount } = useSetAmount();
-  const { setCardId } = useSelectCard();
+const SuccessAddMoney = ({ accountData, showAddMoneyPage, showPayServicePage}: SuccessAddMoneyProps) => {
+  const { amount } = useSetAmount();
+  const { cardId, setCardId } = useSelectCard();
   const date = new Date();
   const router = useRouter();
 
@@ -33,7 +35,7 @@ const SuccessAddMoney = ({ accountData}: SuccessAddMoneyProps) => {
 		  </div>
 		
           <h2 className="font-bold text-base md:text-2xl text-black">
-            Ya cargamos el dinero en tu cuenta
+            {showAddMoneyPage ? "Ya cargamos el dinero en tu cuenta" : "Ya realizamos tu pago"} 
           </h2>
         </div>
         <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
@@ -62,7 +64,7 @@ const SuccessAddMoney = ({ accountData}: SuccessAddMoneyProps) => {
         </div>
 
         <div className="w-full xl:justify-items-end flex-col gap-5 flex md:flex-row-reverse">
-          <div className="w-1/4">
+          <div className="w-full xl:w-[233px]">
 		  <button
             onClick={handleDownloadReceipt}
             className="w-full bg-green border-green h-[50px] md:h-[64px] flex p-5 font-bold text-center text-dark1 items-center rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] justify-center"
@@ -70,7 +72,7 @@ const SuccessAddMoney = ({ accountData}: SuccessAddMoneyProps) => {
             Descargar comprobante
           </button>
 		  </div>
-		  <div className="w-1/4">
+		  <div className="w-full xl:w-[233px]">
 		  <button
             onClick={handlePushToDashboard}
             className="w-full bg-button1 border-button1 border-green h-[50px] md:h-[64px] flex p-5 font-bold text-center text-dark1 items-center rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] justify-center"

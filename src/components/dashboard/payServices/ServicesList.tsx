@@ -25,7 +25,7 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
 
 
   const handleSelectService = (service: ServiceType) => {
-    setServiceId(service.id);
+    setServiceId(service.id.toString());
     toast.success(`Se selecciono el servicio: ${service.name}`);
     console.log(serviceId);
     router.push(`/dashboard/pay-services/account`);

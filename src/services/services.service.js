@@ -34,4 +34,29 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com";
       return [];
     }
   };
+
+  // GET card by Id. Get a single service with id, name, date and invoice value
+  export const getServiceId = async (id) => {
+    try {
+      const response = await fetch(`${BASE_URL}/service/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("⚠️ Error en la respuesta de la API:", errorData);
+        throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo seleccionar la tarjeta"}`);
+      }
+
+      return response.json(); 
+  
+    } catch (error) {
+      console.error("Error fetching services:", error.message);
+      throw error;
+    }
+  };
+
   

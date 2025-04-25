@@ -85,6 +85,7 @@ const RegisterForm = () => {
               fieldName="dni"
               errorText={errors.dni?.message}
               placeholder="DNI*"
+              autoComplete={"off"}
             />
           </div>
 

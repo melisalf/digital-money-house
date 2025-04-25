@@ -20,6 +20,8 @@ export const RegisterScheme = yup
       .string()
       .required("El campo es requerido")
       .email("Correo inválido"),
+     // .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Correo inválido"),
+     //  .matches(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,"Ingresa un correo electrónico válido"
 
     password: yup
       .string()

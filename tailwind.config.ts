@@ -5,7 +5,7 @@ const Config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./public/assets/**/*.png",
+    "./public/assets/**/*.{png,svg,webp}",
   ],
   theme: {
 		extend: {

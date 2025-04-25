@@ -10,7 +10,7 @@ import { useSelectCard } from "@/context/moneyContext";
 type CardsListProps = {
   cardsList: CardType[];
   accountId: number;
-  showAddMoneyPage: boolean;
+  showAddMoneyPage?: boolean;
   token: string;
 };
 const UserCards = ({

@@ -1,9 +1,8 @@
 "use client";
+
 import { useState, useEffect, ChangeEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TransactionType } from "@/types/transaction.types";
-
-// Custom Hook para filtros y paginación.
 
 const ITEMS_PER_PAGE = 10;
 
@@ -14,36 +13,46 @@ const useTransactions = (
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Estados locales
+  // Estado del input del buscador
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [period, setPeriod] = useState<string>(""); 
   const [filteredTransactions, setFilteredTransactions] = useState<
     TransactionType[]
   >([]);
 
-  // Filtrar transacciones por búsqueda
+  // Aplicar filtro por descripción si corresponde
   useEffect(() => {
     const searchQuery = searchParams.get("search") || "";
     setSearchTerm(searchQuery);
+
     if (showActivityPage) {
       const filtered = allTransactions.filter((t) =>
-        t.description.toLowerCase().includes(searchTerm.toLowerCase())
+        t.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredTransactions(filtered);
+      setCurrentPage(1); // ✅ Reinicia la paginación cuando se aplica un nuevo filtro
     } else {
       setFilteredTransactions(allTransactions);
     }
-  }, [searchTerm, allTransactions, showActivityPage]);
+  }, [searchParams, allTransactions, showActivityPage]);
 
-  // Calcular total de páginas
+  // Calcular páginas
   const totalPages = Math.ceil(filteredTransactions.length / ITEMS_PER_PAGE);
   const paginatedTransactions = filteredTransactions.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
 
+  // Handlers para búsqueda
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+    setCurrentPage(1); // ✅ Reinicia la paginación en búsquedas en tiempo real
+
+    if (showActivityPage) {
+      router.push(`/dashboard/activity?search=${value}`);
+    }
   };
 
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -51,13 +60,13 @@ const useTransactions = (
       redirectToActivityPage();
     }
   };
+
   const redirectToActivityPage = () => {
     if (searchTerm.trim().length > 0) {
       router.push(`/dashboard/activity?search=${searchTerm}`);
     }
   };
 
-  // Cambiar página
   const changePage = (page: number) => {
     setCurrentPage(page);
   };

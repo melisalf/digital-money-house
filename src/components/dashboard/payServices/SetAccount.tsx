@@ -1,11 +1,9 @@
 "use client";
-import ErrorIcon from "@/components/common/Icons/ErrorIcon";
-import { useSelectService } from "@/context/moneyContext";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast, Toaster } from "sonner";
 import ErrorPay from "./ErrorPay";
-import ErrorAccount from "./ErrorPay";
 
 const ACCOUNT = 37289701912;
 
@@ -15,26 +13,44 @@ const SetAccount = () => {
   const [errorAccount, setErrorAccount] = useState<boolean>(false);
 
   const checkAddNumberAccount = () => {
-    if(!account || account == "" ) {
-      //toast.error("Por favor ingrese el número de cliente")
+    if (!account || account.trim() === "") {
+      toast.error("Por favor ingrese el número de cliente");
       return;
-    } else {
-      const numberAccount = Number(account);
-      if(numberAccount !== ACCOUNT){
-        handleErrorNumberAccount();
-      } else {
-        redirectSelectPaymentPage(account);
-      }
     }
-  }
+  
+    // Validar que no haya espacios
+    if (/\s/.test(account)) {
+      toast.error("El número no debe contener espacios");
+      return;
+    }
+  
+    // Validar que sean exactamente 11 dígitos numéricos
+    if (!/^\d{11}$/.test(account)) {
+      toast.error("El número debe tener exactamente 11 dígitos numéricos.");
+      toast.error("Agregá ceros adelante si tenés menos.");
+      return;
+    }
+  
+    // Validar que no comience con 2
+    if (account.startsWith("2")) {
+      toast.error("El número no debe comenzar con '2'");
+      return;
+    }
+  
+    const numberAccount = Number(account);
+    if (numberAccount !== ACCOUNT) {
+      handleErrorNumberAccount();
+    } else {
+      redirectPaymentServicePage(account);
+    }
+  };
+  
 
   const handleErrorNumberAccount = () => {
     setErrorAccount(true);
-  }
-    
- 
+  };
 
-  const redirectSelectPaymentPage = (account: string) => {
+  const redirectPaymentServicePage = (account: string) => {
     if (account || account.length === 11) {
       setAccount(account);
       console.log(account);
@@ -49,6 +65,14 @@ const SetAccount = () => {
 
   return (
     <>
+      <Toaster
+        position="bottom-right"
+        expand={true}
+        richColors
+        toastOptions={{
+          className: "text-dark2 bg-green border-green",
+        }}
+      />
       {!errorAccount && (
         <section className="flex flex-col gap-5">
           <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] px-6 pt-5 md:px-8 md:py-8 pb-16 md:gap-6 xl:px-12 xl:py-9">
@@ -100,8 +124,8 @@ const SetAccount = () => {
                 "w-[165px] h-[50px] flex p-5 font-bold text-center text-dark1 items-center rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] justify-center",
                 {
                   "bg-green border-green ": account.length === 11,
-                      "bg-button1 border-button1 cursor-not-allowed":
-                        account.length != 11,
+                  "bg-button1 border-button1 cursor-not-allowed":
+                    account.length != 11,
                 }
               )}
             >
@@ -112,10 +136,7 @@ const SetAccount = () => {
       )}
 
       {errorAccount && (
-        <ErrorPay
-        setErrorAccount = {setErrorAccount}
-        showErrorAccount = {true}
-        />
+        <ErrorPay setErrorAccount={setErrorAccount} showErrorAccount={true} />
       )}
     </>
   );

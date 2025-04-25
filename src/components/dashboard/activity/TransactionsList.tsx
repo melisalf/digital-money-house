@@ -5,6 +5,7 @@ import ArrowIcon from "@/components/common/Icons/ArrowIcon";
 import { TransactionType } from "@/types/transaction.types";
 import useTransactions from "@/hooks/useTransactions";
 import FilterIcon from "@/components/common/Icons/FilterIcon";
+import ButtonFilter from "./ButtonFilter";
 
 type TransactionsListProps = {
   transactionsList: TransactionType[];
@@ -41,26 +42,35 @@ const TransactionsList = ({
             className="text-black/50 text-base w-full outline-none md:text-[18px]"
             type="text"
             placeholder="Buscar en tu actividad"
-            value={searchTerm}
+            defaultValue={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleSearchKeyDown}
           />
         </div>
 
         {showActivityPage && (
-          <div className="hidden md:block rounded-[10px]  bg-green shadow-md">
-            <button className="w-full gap-16 flex justify-between p-5 items-center">
-              <span className="text-black text-base font-bold">Filtrar</span>
-              <FilterIcon />
-            </button>
-          </div>
+           <div className="hidden md:block">
+          <ButtonFilter/>
+           </div>
+          
         )}
       </section>
 
       <section className="w-full justify-start items-start p-5 md:py-10 md:px-8 xl:px-12 flex flex-col rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  ">
-        <h2 className="w-full text-base font-bold border-b border-gray1 md:border-dark1 pb-5">
+        <div className="w-full flex justify-between items-center pb-5  border-b border-button1 md:border-dark1/30 ">
+
+        <h2 className="w-full text-base font-bold">
           Tu actividad
         </h2>
+        {showActivityPage && (
+          <div className="md:hidden">
+              <ButtonFilter/>
+          </div>
+
+        )}
+      
+        </div>
+       
         {paginatedTransactions.length === 0 ? (
           <p className="text-gray-500 mt-4">No hay movimientos en tu cuenta.</p>
         ) : (
@@ -68,7 +78,7 @@ const TransactionsList = ({
             {paginatedTransactions.map((transaction) => (
               <Link
                 href={`/dashboard/activity/${transaction.id}`}
-                className="w-full flex flex-row justify-between items-start md:items-center border-b border-gray1 md:border-dark1 py-3 md:py-4"
+                className="w-full flex flex-row justify-between items-start md:items-center border-b border-button1 md:border-dark1/30 py-3 md:py-4 hover:"
                 key={transaction.id}
               >
                 <div className="flex flex-row gap-2.5 md:gap-4 items-center">

@@ -34,7 +34,7 @@ const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
         <Link
           key={`${item.name}-${index}`}
           href={item.path}
-          className={clsx("text-[17px] text-dark1 hover:font-extrabold", {
+          className={clsx("text-[17px] text-dark1 hover:font-extrabold ", {
             "font-extrabold": pathname === item.path && pathname.includes(item.path),
             "font-semibold": pathname !== item.path,
           })}

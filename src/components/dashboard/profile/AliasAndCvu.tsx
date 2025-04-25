@@ -26,7 +26,7 @@ const AliasAndCvu = ( {accountData}: AccountDataProps ) => {
           </span>
         </div>
 
-        <div className="w-6 h-6 md:w-8 md:h-8 flex items-center">
+        <div className="w-8 h-8 flex items-center justify-center">
           <CopyToClipboard className="w-6 h-6" copyText={accountData.cvu} />
         </div>
       </div>
@@ -45,7 +45,7 @@ const AliasAndCvu = ( {accountData}: AccountDataProps ) => {
           </span>
         </div>
 
-        <div className="w-6 h-6 md:w-8 md:h-8 flex items-center">
+        <div className="w-8 h-8 flex items-center justify-center">
           <CopyToClipboard className="w-6 h-6" copyText={accountData.cvu} />
         </div>
       </div>

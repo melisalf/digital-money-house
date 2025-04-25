@@ -11,7 +11,7 @@ export type TransactionType = {
 
 export type NewTransactionType = {
   amount: number;
-  dated: "string";
-  description: "string";
+  dated: string;
+  description: string;
 };
 

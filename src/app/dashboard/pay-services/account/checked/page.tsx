@@ -1,11 +1,33 @@
-import React from 'react'
+import SelectCard from "@/components/dashboard/addMoney/SelectCard";
+import DetailService from "@/components/dashboard/payServices/DetailService";
+import { getAccount } from "@/services/account.service";
+import { getAllCards } from "@/services/cards.service";
+import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 
-const PayServicesChecked = () => {
+
+const PaymentServicePage = async () => {
+  const token = getTokenFromCookie();
+  const accountData = await getAccount(token);
+  const accountId = accountData.id;
+  const cardsList = await getAllCards(accountId, token);
+
+  // TRUE cuando esta en true se muestran todas las tarjetas con un select.
+  // FALSE cuando esta en false se muestran todas las tarjetas con un delete.
+  const showPayServicePage = true;
+  const showAddMoneyPage = true;
+
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+          <DetailService />
+          <SelectCard
+            accountId={accountId}
+            cardsList={cardsList}
+            showPayServicePage={showPayServicePage}
+            showAddMoneyPage={showAddMoneyPage}
+            token={token}
+          />
+    </>
+  );
+};
 
-export default PayServicesChecked
+export default PaymentServicePage;

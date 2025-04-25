@@ -17,7 +17,8 @@ const EditUserIcon = ({ onClick, className }: EditUserIconProps) => {
     <g clipPath="url(#clip0_1623_2698)">
       <path
         d="M2.44531 15.5091V18.9466H5.88281L16.0211 8.80829L12.5836 5.37079L2.44531 15.5091ZM18.6795 6.14996C19.037 5.79246 19.037 5.21496 18.6795 4.85746L16.5345 2.71246C16.177 2.35496 15.5995 2.35496 15.242 2.71246L13.5645 4.38996L17.002 7.82746L18.6795 6.14996Z"
-        fill="#CECECE"
+        fill="none"
+        className={className}
       />
     </g>
     <defs>

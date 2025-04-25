@@ -1,8 +1,18 @@
+import SuccessAddMoney from '@/components/dashboard/addMoney/SuccessAddMoney';
+import { getAccount } from '@/services/account.service';
+import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
 import React from 'react'
 
-const PayServicesSuccess = () => {
+const PayServicesSuccess = async () => {
+
+  const token = getTokenFromCookie();
+  const accountData = await getAccount(token);
+  const showPayServicePage = true;
+
   return (
-    <div>PayServicesSuccess</div>
+    <SuccessAddMoney
+    accountData = {accountData}
+    showPayServicePage = {showPayServicePage}/>
   )
 }
 
