@@ -4,6 +4,7 @@ import { useSetAmount } from "@/context/moneyContext";
 import { AccountType } from "@/types/account.types";
 import { useRouter } from "next/navigation";
 import { newDeposit } from "@/services/transferences.service";
+import { useTransaction } from "@/context/transactionContext";
 
 type CheckAddMoneyProps = {
   accountData: AccountType;
@@ -13,6 +14,7 @@ type CheckAddMoneyProps = {
 const CheckAddMoney = ({ accountData, token }: CheckAddMoneyProps) => {
   const router = useRouter();
   const { amount } = useSetAmount();
+  const {setTransaction} = useTransaction();
 
   const handleEditAmount = () => {
     router.push(`/dashboard/add-money/card/amount`);
@@ -24,11 +26,12 @@ const CheckAddMoney = ({ accountData, token }: CheckAddMoneyProps) => {
         amount: Number(amount),
         dated: new Date().toISOString(),
         origin: "Cuenta propia",
-        destination: "Mi cuenta",
+        destination: "Digital Money House",
       } ;  
 
       if(body) {
-        const response = await newDeposit(token, accountData.id, body);
+        const transaction = await newDeposit(token, accountData.id, body);
+        setTransaction(transaction);
         router.push(`/dashboard/add-money/card/amount/checked/success`);
       }
      

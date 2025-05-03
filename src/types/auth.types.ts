@@ -21,7 +21,7 @@ export type LoginBodyType = {
 
 export type LoginResponseType = {
     accessToken: string;
-    user: UserDataType
+    error?: string
 }
 
 export type AuthResponseType = {

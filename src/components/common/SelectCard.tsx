@@ -6,10 +6,11 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast, Toaster } from "sonner";
-import UserCards from "../cards/UserCards";
+import UserCards from "../dashboard/cards/UserCards";
 import { newTransaction } from "@/services/transactions.service";
 import { useSelectService } from "@/context/moneyContext";
 import { getServiceId } from "@/services/services.service";
+import { useTransaction } from "@/context/transactionContext";
 
 
 type SelectCardProps = {
@@ -31,6 +32,7 @@ const SelectCard = ({
   const router = useRouter();
   const { cardId } = useSelectCard();
   const { serviceId } = useSelectService();
+  const {setTransaction} = useTransaction();
 
   const handlePayService = async () => {
     if (!cardId || cardId === 0) {
@@ -46,19 +48,10 @@ const SelectCard = ({
         dated: newDate.toString(),
         description: `Pago a ${service.name}`
       };
-
       console.log(data);
   
-      await newTransaction(token, accountId, data);
-  
-      // Guardar datos necesarios en localStorage o contexto si vas a mostrarlos en la próxima página
-      localStorage.setItem("paySuccessData", JSON.stringify({
-        date: data.dated,
-        amount: data.amount,
-        description: data.description,
-        cardId,
-      }));
-  
+      const transaction = await newTransaction(token, accountId, data);
+      setTransaction(transaction);
       router.push("/dashboard/pay-services/account/checked/success");
   
     } catch (error) {

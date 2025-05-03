@@ -1,4 +1,4 @@
-import SelectCard from "@/components/dashboard/addMoney/SelectCard";
+import SelectCard from "@/components/common/SelectCard";
 import DetailService from "@/components/dashboard/payServices/DetailService";
 import { getAccount } from "@/services/account.service";
 import { getAllCards } from "@/services/cards.service";

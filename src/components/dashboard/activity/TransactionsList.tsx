@@ -6,6 +6,7 @@ import { TransactionType } from "@/types/transaction.types";
 import useTransactions from "@/hooks/useTransactions";
 import FilterIcon from "@/components/common/Icons/FilterIcon";
 import ButtonFilter from "./ButtonFilter";
+import { useState } from "react";
 
 type TransactionsListProps = {
   transactionsList: TransactionType[];
@@ -24,8 +25,12 @@ const TransactionsList = ({
     changePage,
     paginatedTransactions,
     totalPages,
+    applyPeriodFilter,
+    clearFilters,
+    period,
   } = useTransactions(transactionsList, showActivityPage);
 
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
 
   const getWeekday = (dateString: string): string => {
     const date = new Date(dateString);
@@ -49,28 +54,34 @@ const TransactionsList = ({
         </div>
 
         {showActivityPage && (
-           <div className="hidden md:block">
-          <ButtonFilter/>
-           </div>
-          
+          <div className="hidden md:block">
+            <ButtonFilter
+              onClick={() => setShowFilterPanel((prev) => !prev)}
+              showFilterPanel={showFilterPanel}
+              onApply={applyPeriodFilter}
+              onClear={clearFilters}
+              setShowFilterPanel = {setShowFilterPanel}
+            />
+          </div>
         )}
       </section>
 
       <section className="w-full justify-start items-start p-5 md:py-10 md:px-8 xl:px-12 flex flex-col rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  ">
         <div className="w-full flex justify-between items-center pb-5  border-b border-button1 md:border-dark1/30 ">
-
-        <h2 className="w-full text-base font-bold">
-          Tu actividad
-        </h2>
-        {showActivityPage && (
-          <div className="md:hidden">
-              <ButtonFilter/>
-          </div>
-
-        )}
-      
+          <h2 className="w-full text-base font-bold">Tu actividad</h2>
+          {showActivityPage && (
+            <div className="md:hidden">
+              <ButtonFilter
+                onClick={() => setShowFilterPanel((prev) => !prev)}
+                showFilterPanel={showFilterPanel}
+                onApply={applyPeriodFilter}
+                onClear={clearFilters}
+                setShowFilterPanel = {setShowFilterPanel}
+              />
+            </div>
+          )}
         </div>
-       
+
         {paginatedTransactions.length === 0 ? (
           <p className="text-gray-500 mt-4">No hay movimientos en tu cuenta.</p>
         ) : (

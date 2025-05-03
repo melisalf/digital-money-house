@@ -1,4 +1,4 @@
-import SuccessAddMoney from '@/components/dashboard/addMoney/SuccessAddMoney';
+import SuccessMessage from '@/components/common/SuccessMessage';
 import { getAccount } from '@/services/account.service';
 import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
 import React from 'react'
@@ -10,7 +10,8 @@ const PayServicesSuccess = async () => {
   const showPayServicePage = true;
 
   return (
-    <SuccessAddMoney
+    <SuccessMessage
+    operationType='payService'
     accountData = {accountData}
     showPayServicePage = {showPayServicePage}/>
   )

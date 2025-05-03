@@ -13,7 +13,6 @@ const useTransactions = (
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Estado del input del buscador
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [period, setPeriod] = useState<string>(""); 
@@ -21,21 +20,49 @@ const useTransactions = (
     TransactionType[]
   >([]);
 
-  // Aplicar filtro por descripción si corresponde
+  const isWithinPeriod = (dateString: string, periodValue: string): boolean => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const oneDay = 86400000;
+
+    switch (periodValue) {
+      case "today":
+        return date.toDateString() === today.toDateString();
+      case "yesterday":
+        const yesterday = new Date(today.getTime() - oneDay);
+        return date.toDateString() === yesterday.toDateString();
+      case "week":
+        return date > new Date(today.getTime() - 7 * oneDay);
+      case "15days":
+        return date > new Date(today.getTime() - 15 * oneDay);
+      case "month":
+        return date > new Date(today.getTime() - 30 * oneDay);
+      case "year":
+        return date > new Date(today.getTime() - 365 * oneDay);
+      default:
+        return true;
+    }
+  };
+
   useEffect(() => {
     const searchQuery = searchParams.get("search") || "";
     setSearchTerm(searchQuery);
 
+    let result = allTransactions;
+
     if (showActivityPage) {
-      const filtered = allTransactions.filter((t) =>
+      result = allTransactions.filter((t) =>
         t.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredTransactions(filtered);
-      setCurrentPage(1); // ✅ Reinicia la paginación cuando se aplica un nuevo filtro
-    } else {
-      setFilteredTransactions(allTransactions);
+
+      if (period) {
+        result = result.filter((t) => isWithinPeriod(t.dated, period));
+      }
     }
-  }, [searchParams, allTransactions, showActivityPage]);
+
+    setFilteredTransactions(result);
+    setCurrentPage(1); // volver a la página 1 al aplicar filtro
+  }, [searchParams, allTransactions, showActivityPage, period]);
 
   // Calcular páginas
   const totalPages = Math.ceil(filteredTransactions.length / ITEMS_PER_PAGE);
@@ -44,17 +71,20 @@ const useTransactions = (
     currentPage * ITEMS_PER_PAGE
   );
 
+  
+
   // Handlers para búsqueda
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
-    setCurrentPage(1); // ✅ Reinicia la paginación en búsquedas en tiempo real
+    setCurrentPage(1); // Reinicia la paginación en búsquedas en tiempo real
 
     if (showActivityPage) {
       router.push(`/dashboard/activity?search=${value}`);
     }
   };
 
+  
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       redirectToActivityPage();
@@ -65,6 +95,14 @@ const useTransactions = (
     if (searchTerm.trim().length > 0) {
       router.push(`/dashboard/activity?search=${searchTerm}`);
     }
+  };
+
+  const applyPeriodFilter = (value: string) => {
+    setPeriod(value);
+  };
+
+  const clearFilters = () => {
+    setPeriod("");
   };
 
   const changePage = (page: number) => {
@@ -80,6 +118,9 @@ const useTransactions = (
     changePage,
     paginatedTransactions,
     totalPages,
+    applyPeriodFilter,
+    clearFilters,
+    period,
   };
 };
 

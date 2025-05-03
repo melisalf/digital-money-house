@@ -21,6 +21,7 @@ export type RegisterResponseType = {
   account_id: number;
   email: string;
   user_id: number;
+  error?: string;
 };
 
 export type UserDataType = {
@@ -32,6 +33,7 @@ export type UserDataType = {
   password: string;
   phone: string;
 };
+
 
 export type UserEditDataType = {
   id: string;

@@ -1,7 +1,5 @@
 const BASE_URL = "https://digitalmoney.digitalhouse.com";
 
-
-
 //GET all services, and if there are any, return an empty array.
 
   export const getAllServices = async () => {

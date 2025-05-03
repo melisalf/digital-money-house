@@ -1,3 +1,6 @@
+import { TransactionType } from "@/types/transaction.types";
+import { NewDepositType } from "@/types/transference.types";
+
 const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 
 // POST 
@@ -5,9 +8,9 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 export const newTransference = async () => {
 }
 
-// POST
+// POST  deposit
 
-export const newDeposit = async (token, account_id, data) => {
+export const newDeposit = async (token: string, account_id: number, data: NewDepositType) => {
     try {
         if (!token || !account_id) {
           throw new Error("Token o account_id no válidos");
@@ -33,7 +36,8 @@ export const newDeposit = async (token, account_id, data) => {
           console.error("⚠️ Error en la respuesta de la API:", errorData);
           throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo realizar el deposito"}`);
         }
-    
+        const deposit: TransactionType = await response.json();
+        return deposit;
         console.log("✅ Deposito realizado con exito");
     
       } catch (error) {
