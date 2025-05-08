@@ -1,8 +1,10 @@
+import { ServiceType } from "@/types/service.types";
+
 const BASE_URL = "https://digitalmoney.digitalhouse.com";
 
 //GET all services, and if there are any, return an empty array.
 
-  export const getAllServices = async () => {
+  export const getAllServices = async (): Promise<ServiceType[]> => {
     try {
       const response = await fetch(`${BASE_URL}/service`, {
         method: "GET",
@@ -27,14 +29,16 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com";
       const data = JSON.parse(text);
       return Array.isArray(data) ? data : [];
   
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching services:", error.message);
       return [];
     }
   };
 
+
+
   // GET card by Id. Get a single service with id, name, date and invoice value
-  export const getServiceId = async (id) => {
+  export const getServiceId = async (id: string): Promise<ServiceType> => {
     try {
       const response = await fetch(`${BASE_URL}/service/${id}`, {
         method: "GET",
@@ -51,7 +55,7 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com";
 
       return response.json(); 
   
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching services:", error.message);
       throw error;
     }

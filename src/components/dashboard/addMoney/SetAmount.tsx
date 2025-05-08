@@ -18,7 +18,7 @@ const SetAmount = () => {
       redirectCheckAddMoneyPage(amountNumber);
     };
 
-    const redirectCheckAddMoneyPage = (amountNumber: Number) => {
+    const redirectCheckAddMoneyPage = (amountNumber: number) => {
       if (amountNumber > 0) {
         setAmount(amountNumber)
         console.log(amount)

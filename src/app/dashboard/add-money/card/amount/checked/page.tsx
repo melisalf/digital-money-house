@@ -1,4 +1,5 @@
-import CheckAddMoney from '@/components/dashboard/addMoney/checkAddMoney'
+
+import CheckAddMoney from '@/components/dashboard/addMoney/CheckAddMoney';
 import { getAccount } from '@/services/account.service';
 import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
 import React from 'react'

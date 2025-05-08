@@ -20,7 +20,7 @@ export type LoginBodyType = {
 
 
 export type LoginResponseType = {
-    accessToken: string;
+    token: string;
     error?: string
 }
 

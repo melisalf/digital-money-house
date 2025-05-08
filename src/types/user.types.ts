@@ -25,7 +25,7 @@ export type RegisterResponseType = {
 };
 
 export type UserDataType = {
-  id: string;
+  id: number;
   firstname: string;
   lastname: string;
   dni: string;

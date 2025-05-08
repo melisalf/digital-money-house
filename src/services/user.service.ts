@@ -6,7 +6,7 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 
 export const getUser = async (
   token: string,
-  user_id: string
+  user_id: number
 ): Promise<any> => {
   try {
     const response = await fetch(`${BASE_URL}/users/${user_id}`, {
@@ -115,7 +115,7 @@ export const newUser = async (
 
 // PUT 
 
-export const updateUser = async (user_id: string, updatedData: Partial<UserDataType>, token: string) => {
+export const updateUser = async (user_id: number, updatedData: Partial<UserDataType>, token: string) => {
   const response = await fetch(`${BASE_URL}/users/${user_id}`, {
     method: "PATCH",
     headers: {

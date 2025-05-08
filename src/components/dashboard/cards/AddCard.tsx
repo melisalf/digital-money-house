@@ -1,15 +1,17 @@
 "use client";
-import InputText from "@/components/form/InputText";
-import SubmitButton from "@/components/form/SubmitButton";
+import InputText from "@/components/common/form/InputText";
+import SubmitButton from "@/components/common/form/SubmitButton";
 import { CardScheme } from "@/schemes/card.scheme";
 import { newCard } from "@/services/cards.service";
 import { CardBodyType, CardType } from "@/types/card.types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import ImageCard from "./ImageCard";
 import { toast, Toaster } from "sonner";
+import clsx from "clsx";
+import { convertDateFormat } from "@/utils/convertDateFormat";
 
 type AddCardProps = {
   account_id: number;
@@ -24,16 +26,9 @@ type CardFormData = {
   securityCode: string;
 };
 
-
 const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
-
-  const convertDateFormat = (dateExpiry: string): string => {
-    const [month, year] = dateExpiry.split("/");
-    const fullYear = year.length === 2 ? `20${year}` : year; // Agregar '20' si el año es de 2 dígitos
-    return `${month}/${fullYear}`;
-  };
 
   const CardFormMethods = useForm<CardFormData>({
     resolver: yupResolver(CardScheme),
@@ -47,9 +42,8 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
   });
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
-    setValue,
     reset,
   } = CardFormMethods;
 
@@ -82,14 +76,14 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
         setServerError(error.message);
         toast.error("Error al crear la tarjeta");
       } else {
-        setServerError("Error desconocido al crear la tarjeta", error);
+        setServerError("Error desconocido al crear la tarjeta");
         toast.error("Error al crear la tarjeta");
       }
     }
   };
 
   return (
-    <section className="w-full flex flex-col items-center gap-5 rounded-[10px] p-6  md:p-8 xl:px-28 xl:py-10  bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+    <section className="w-full flex flex-col items-center gap-5 rounded-[10px] p-6  md:p-8 xl:px-28 xl:py-8  bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
       <ImageCard
         number={cardValues.numberCard || ""}
         name={cardValues.nameTitular || ""}
@@ -105,12 +99,12 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
       />
       <FormProvider {...CardFormMethods}>
         <form
-          className="w-[300px] md:w-full flex flex-col lg:grid lg:grid-cols-2 items-center gap-5 md:gap-4 lg:gap-6 "
+          className="w-[300px] md:w-[360px] lg:w-full flex flex-col lg:grid lg:grid-cols-2 items-center justify-between gap-5 md:gap-4 lg:gap-6 "
           onSubmit={handleSubmit(onSubmitAddCard)}
         >
-          <div className="flex flex-col gap-5 w-[300px] md:w-[360px] md:gap-4 lg:col-span-1 lg:gap-6">
+          <div className="w-full flex  flex-col gap-5  md:gap-4 lg:col-span-1">
             {/* Numero Tarjeta */}
-            <div className="">
+            <div className="h-[70px] md:h-[84px]">
               <InputText
                 fieldName="numberCard"
                 placeholder="Número de la tarjeta*"
@@ -120,30 +114,46 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
             </div>
 
             {/* Nombre Titular */}
-            <div>
+            <div className="h-[70px] md:h-[84px]">
               <InputText
                 fieldName="nameTitular"
                 type="text"
                 placeholder="Nombre y apellido*"
                 errorText={errors.nameTitular?.message}
+                inputClassName=""
+                autoComplete={"off"}
               />
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 w-[300px] md:w-[360px] md:gap-4 md:flex-row lg:flex-col  lg:col-span-1 lg:gap-6">
+          <div className="w-full flex  flex-col gap-5  md:gap-4 md:flex-row lg:flex-col  lg:col-span-1">
             {/* Fecha de vencimiento */}
-            <div>
-              <InputText
-                fieldName="expirationDate"
-                placeholder="Fecha de vencimiento*"
-                errorText={errors.expirationDate?.message}
-                maxLength={5}
-                inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-0 lg:pt-5"
+            <div className="h-[70px] md:h-[84px]">
+              <Controller
+                name="expirationDate"
+                control={CardFormMethods.control}
+                render={({ field }) => (
+                  <InputText
+                    {...field}
+                    fieldName="expirationDate"
+                    placeholder="Fecha de vencimiento*"
+                    maxLength={5}
+                    errorText={errors.expirationDate?.message}
+                    inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-0 lg:pt-5"
+                    onChange={(e) => {
+                      let value = e.target.value.replace(/\D/g, "");
+                      if (value.length >= 3) {
+                        value = value.slice(0, 2) + "/" + value.slice(2, 4);
+                      }
+                      field.onChange(value.slice(0, 5)); // Actualiza el valor en RHF
+                    }}
+                  />
+                )}
               />
             </div>
 
             {/* Codigo de seguridad */}
-            <div>
+            <div className=" h-[70px] md:h-[84px]">
               {" "}
               <InputText
                 fieldName="securityCode"
@@ -156,10 +166,17 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
           </div>
 
           {/* Disabled hasta que se validen los campos */}
-          <div className="w-[300px] md:w-[360px] mt-3 lg:col-span-1 lg:gap-6 lg:col-start-2 ">
-            <SubmitButton className="bg-button1" text="Continuar" />
+          <div className="w-full lg:col-span-1 lg:col-start-2 ">
+            <SubmitButton
+              className={clsx("transition-all duration-300", {
+                "bg-green border-green cursor-pointer text-dark1": isValid,
+                "bg-button1 border-button1 text-dark1/50 cursor-not-allowed":
+                  !isValid,
+              })}
+              text="Continuar"
+            />
           </div>
-
+          
           {/* Mensaje de error del servidor. */}
           {serverError && (
             <p className="w-[300px] md:w-[360px]  font-semibold flex flex-col text-sm md:text-base italic text-error1 text-center mt-4">

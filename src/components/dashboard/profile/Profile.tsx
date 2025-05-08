@@ -3,7 +3,7 @@
 import EditUserIcon from "@/components/common/Icons/EditUserIcon";
 import { UserDataType } from "@/types/user.types";
 import { useState } from "react";
-import { updateUser } from "@/services/users.service";
+import { updateUser } from "@/services/user.service";
 import { toast } from "sonner";
 
 type ProfileProps = {

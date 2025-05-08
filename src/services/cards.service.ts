@@ -5,7 +5,7 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 // GET all cards by account_id
 
 export const getAllCards = async (
-  account_id: string,
+  account_id: number,
   token: string
 ): Promise<CardType[]> => {
   try {
@@ -67,8 +67,8 @@ export const getAllCards = async (
 // // GET card by Id
 
 export const getCardId = async (
-  account_id: string,
-  card_id: string,
+  account_id: number,
+  card_id: number,
   token: string
 ): Promise<CardType> => {
   try {
@@ -140,7 +140,7 @@ export const getCardId = async (
 // // POST new card.
 
 export const newCard = async (
-    account_id: string,
+    account_id: number,
     token: string,
     data: CardBodyType
   ): Promise<any> => {
@@ -208,8 +208,8 @@ export const newCard = async (
 // // DELETE card by id.
 
 export const deleteCardId = async (
-    account_id: string,
-    card_id: string,
+    account_id: number,
+    card_id: number,
     token: string
   ): Promise<void> => {
     try {

@@ -29,15 +29,15 @@ const InputText = ({
         placeholder={placeholder}
         {...props}
         className={clsx(
-          "w-full h-[50px] md:h-[64px] p-5 text-base md:text-[18px] bg-white text-black/50 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] outline-none transition-all focus:border-gray1 focus:ring-0",
+          "w-full h-[50px] md:h-[64px] p-5 text-base md:text-[18px] bg-white text-dark1 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] outline-none transition-all focus:border-gray1",
           hasError 
             ? "border border-error1 focus:outline-error1"
-            : "border-gray1 focus:outline-gray1 focus:right-0",
+            : "border border-gray1 focus:outline-gray1 ",
           inputClassName
         )}
       />
       {hasError && (
-        <p className="w-full max-w-[300px] md:max-w-[360px] flex flex-col text-sm italic text-error1 pt-2 pl-3 md:pt-3 md:pl-4 text-left">
+        <p className="w-full h-[12px] max-w-[300px] md:max-w-[360px] flex flex-col text-sm italic text-error1 pt-1.5 pl-3 md:pt-2 text-left">
           {errorText as string}
         </p>
       )}

@@ -1,17 +1,17 @@
 import { clsx } from "clsx";
-import SVGSpinner from "../common/Icons/SpinnerIcon";
+import SVGSpinner from "../Icons/SpinnerIcon";
 
 type SubmitButtonProps = {
   text: string;
   className?: string;
-  isLoading?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 };
 
 const SubmitButton = ({
   text,
   className,
-  isLoading = false,
+  disabled,
   onClick,
 }: SubmitButtonProps) => {
   return (
@@ -20,13 +20,13 @@ const SubmitButton = ({
     <button
     type="submit"
       onClick={onClick}
-      disabled={isLoading}
+      disabled= {disabled}
       className={clsx(
         "w-full h-[50px] md:h-[64px] p-3 md:p-5 text-black text-base font-bold text-center rounded-[10px] transition outline-none",
         className
       )}
     >
-      {isLoading ? <SVGSpinner /> : text}
+      { text}
     </button>
     </div>
   );

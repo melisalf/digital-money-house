@@ -1,5 +1,5 @@
 "use client";
-import InputRadio from "@/components/form/InputRadio";
+import InputRadio from "@/components/common/form/InputRadio";
 import { deleteCardId } from "@/services/cards.service";
 import { CardType } from "@/types/card.types";
 import { useRouter } from "next/navigation";
@@ -22,11 +22,14 @@ const UserCards = ({
   const [cards, setCards] = useState(cardsList);
   const { cardId, setCardId } = useSelectCard();
   const router = useRouter();
-  
 
   const handleSelectCard = (card: CardType) => {
     setCardId(card.id);
-    toast.success(`Se selecciono la tarjeta terminada en: ${card.number_id.toString().slice(-4)}`);
+    toast.success(
+      `Se selecciono la tarjeta terminada en: ${card.number_id
+        .toString()
+        .slice(-4)}`
+    );
     console.log(cardId);
   };
 
@@ -39,7 +42,6 @@ const UserCards = ({
       setCards((prevCards) => prevCards.filter((card) => card.id !== card_id));
       router.refresh();
       toast.success("Tarjeta eliminada con éxito");
-
     } catch (error) {
       console.error("Error al eliminar la tarjeta:", error);
       toast.error("Error al eliminar la tarjeta");
@@ -58,12 +60,13 @@ const UserCards = ({
           <Toaster
             position="bottom-right"
             toastOptions={{
-              className: "text-dark2 bg-green border-green",
+              className: "text-dark1 text-sm border border-dark1 rounded-xl shadow-lg",
             }}
           />
           <ul className="w-full">
             {cards.map((card) => (
-              <li className="w-full flex flex-row justify-between items-center border-b border-dark1/30 md:border-dark1 py-4"
+              <li
+                className="w-full flex flex-row justify-between items-center border-b border-dark1/30 md:border-dark1 py-4"
                 key={card.id}
               >
                 <div className="flex flex-row gap-3 md:gap-4 items-center">
@@ -76,8 +79,40 @@ const UserCards = ({
 
                 {!showAddMoneyPage && (
                   <div className="flex flex-col gap-0  items-end text-dark1">
-                    <button onClick={() => handleDeleteCard(card.id)}>
-                      <span className="text-[12px] font-extrabold md:text-base">
+                    <button
+                      onClick={() => {
+                        toast.custom(
+                          (t) => (
+                            <div className="flex flex-col gap-2 bg-white rounded-xl shadow-lg p-4 text-dark1">
+                              <p className="font-bold">¿Estás seguro?</p>
+                              <p className="text-sm font-semibold">
+                                Vas a eliminar la tarjeta terminada en{" "}
+                                {card.number_id.toString().slice(-4)}
+                              </p>
+                              <div className="flex items-center gap-2 mt-2 ">
+                                <button
+                                  className="text-sm px-3 py-1 font-semibold rounded-md bg-gray1 border border-dark1 text-dark1 hover:font-bold"
+                                  onClick={() => toast.dismiss(t)}
+                                >
+                                  Cancelar
+                                </button>
+                                <button
+                                  className="text-sm px-3 py-1 font-semibold rounded-md bg-green border border-dark1 text-dark1 hover:font-bold"
+                                  onClick={async () => {
+                                    toast.dismiss(t);
+                                    await handleDeleteCard(card.id);
+                                  }}
+                                >
+                                  Eliminar
+                                </button>
+                              </div>
+                            </div>
+                          ),
+                          { duration: Infinity }
+                        );
+                      }}
+                    >
+                      <span className="text-[12px] font-bold md:text-base">
                         Eliminar
                       </span>
                     </button>
@@ -95,7 +130,6 @@ const UserCards = ({
                     wrappedClassName="flex items-center relative"
                   />
                 )}
-
               </li>
             ))}
           </ul>
@@ -106,4 +140,3 @@ const UserCards = ({
 };
 
 export default UserCards;
-

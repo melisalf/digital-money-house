@@ -6,7 +6,7 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 
 export const getAllTransactions = async (
   token: string,
-  account_id: string
+  account_id: number
 ): Promise<TransactionType[]> => {
   try {
     if (!token || !account_id) {
@@ -66,8 +66,8 @@ export const getAllTransactions = async (
 
 export const getTransactionId = async (
   token: string,
-  account_id: string,
-  transaction_id: string
+  account_id: number,
+  transaction_id: number
 ): Promise<TransactionType> => {
   try {
     if (!token || !account_id) {
@@ -126,9 +126,10 @@ export const getTransactionId = async (
 // POST new transaction
 
 export const newTransaction = async (
+  token: string,
   account_id: number,
   data: NewTransactionType,
-  token: string
+ 
 ): Promise<TransactionType> => {
   try {
     const response = await fetch(`${BASE_URL}/accounts/${account_id}/transactions`, {

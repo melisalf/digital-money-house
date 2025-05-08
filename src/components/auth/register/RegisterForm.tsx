@@ -1,12 +1,12 @@
 "use client";
-import InputText from "@/components/form/InputText";
+import InputText from "@/components/common/form/InputText";
 import { RegisterScheme } from "@/schemes/register.scheme";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterBodyType, RegisterFormType } from "@/types/user.types";
 import { useState } from "react";
 import { useRouter } from "../../../../node_modules/next/navigation";
-import SubmitButton from "@/components/form/SubmitButton";
+import SubmitButton from "@/components/common/form/SubmitButton";
 import Cookies from "js-cookie";
 import { newUser } from "@/services/user.service";
 
