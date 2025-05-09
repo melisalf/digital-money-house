@@ -51,26 +51,18 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
 
   const onSubmitAddCard = async (data: CardFormData) => {
     try {
-      if (cardsList.length > 9) {
-        setServerError(
-          "Ya no puedes agregar una nueva tarjeta. (Máximo de 10 tarjetas de credito asociadas a una cuenta)."
-        );
-      }
+      const requestBody: CardBodyType = {
+        cod: Number(data.securityCode),
+        expiration_date: convertDateFormat(data.expirationDate),
+        first_last_name: data.nameTitular,
+        number_id: Number(data.numberCard),
+      };
 
-      if (cardsList.length <= 9) {
-        const requestBody: CardBodyType = {
-          cod: Number(data.securityCode),
-          expiration_date: convertDateFormat(data.expirationDate),
-          first_last_name: data.nameTitular,
-          number_id: Number(data.numberCard),
-        };
-
-        const response = await newCard(account_id, token, requestBody);
-        reset();
-        toast.success("Tarjeta agregada con éxito");
-        router.push("/dashboard/cards");
-        router.refresh();
-      }
+      const response = await newCard(account_id, token, requestBody);
+      reset();
+      toast.success("Tarjeta agregada con éxito");
+      router.push("/dashboard/cards");
+      router.refresh();
     } catch (error) {
       if (error instanceof Error) {
         setServerError(error.message);

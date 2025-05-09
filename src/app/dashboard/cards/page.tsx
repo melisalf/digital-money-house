@@ -23,7 +23,7 @@ export default async function CardsPage() {
   return (
     <>
       <div className="w-full flex flex-col gap-5 ">
-        <section className="w-full flex flex-col bg-dark1  px-6 py-4 gap-8 min-h-[147px] md:justify-center md:px-8 md:py-10 xl:px-10 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+        <section className="w-full flex flex-col bg-dark1  px-6 py-4 gap-7 min-h-[147px] md:justify-center md:px-8 md:py-10 xl:px-12 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
           <h3 className="text-gray1 md:hidden xl:block font-bold ">
             Agregá tu tarjeta de débito o crédito
           </h3>
@@ -46,14 +46,14 @@ export default async function CardsPage() {
           </Link>
         </section>
 
-        <section>
+        
           <UserCards
             accountId={accountId}
             cardsList={cardsList}
             showAddMoneyPage={showAddMoneyPage}
             token= {token}
           />
-        </section>
+        
       </div>
     </>
   );

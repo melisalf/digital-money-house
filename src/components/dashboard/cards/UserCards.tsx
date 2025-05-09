@@ -49,8 +49,8 @@ const UserCards = ({
   };
 
   return (
-    <section className="w-full justify-start items-start p-6 md:py-10 md:px-8 flex flex-col rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  xl:p-12">
-      <h2 className="w-full text-base font-bold border-b border-dark1/30 md:border-dark1 pb-3 md:pb-4">
+    <section className="w-full justify-start items-start p-6 md:py-10 md:px-8 flex flex-col rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  xl:px-12">
+      <h2 className="w-full text-base md:text-lg font-bold border-b border-dark1/30 md:border-dark1 pb-3 md:pb-4">
         Tus tarjetas
       </h2>
       {cards.length === 0 ? (

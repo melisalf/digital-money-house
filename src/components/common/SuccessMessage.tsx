@@ -3,16 +3,20 @@ import CheckIcon from "@/components/common/Icons/CheckIcon";
 import { useSelectCard, useSetAmount } from "@/context/moneyContext";
 import { useTransaction } from "@/context/transactionContext";
 import { AccountType } from "@/types/account.types";
-import { TransactionType } from "@/types/transaction.types";
 import { downloadReceiptPDF } from "@/utils/downloadReceiptPDF";
 import { formatDated } from "@/utils/formatDated";
 import { useRouter } from "next/navigation";
 
+
+type OperationType = "addCard" | "addMoney" | "payService";
+
 type SuccessMessageProps = {
   accountData: AccountType;
-  operationType: "addMoney" | "payService";
   showAddMoneyPage?: boolean;
   showPayServicePage?: boolean;
+  onClose?: () => void;
+  operationType: OperationType;
+  linkTo?: string;
 };
 
 const SuccessMessage = ({

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   transaction: TransactionType;
-  operationType: "addMoney" | "payService";
+  operationType: "addMoney" | "payService" | "addCard";
 };
 
 const SuccessOperation = ({ transaction, operationType }: Props) => {

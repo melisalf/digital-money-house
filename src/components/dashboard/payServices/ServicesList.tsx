@@ -49,7 +49,7 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
         </div>
         {/* Listado de servicios */}
         <div className="w-full flex flex-col p-5 md:px-8 xl:px-12 xl:py-8  rounded-[10px] bg-white text-dark1 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)]">
-          <h2 className="w-full text-base md:text-xl font-bold border-b border-dark1/30 pb-5">
+          <h2 className="w-full text-base md:text-lg font-bold border-b border-dark1/30 pb-5">
             Mas recientes
           </h2>
           {filteredServices.length === 0 ? (

@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast, Toaster } from "sonner";
-import ErrorPay from "./ErrorPay";
+import ErrorPay from "../../common/ErrorMessage";
 
 const ACCOUNT = 37289701912;
 

@@ -14,23 +14,23 @@ const ErrorIcon = ({ className }: ErrorIconProps) => {
         <path
           d="M23 23L42 42"
           stroke="#E81010"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M23 42L42 23"
           stroke="#E81010"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <circle
           cx="32.5"
           cy="32.5"
           r="30.5"
           stroke="#E81010"
-          stroke-width="4"
+          strokeWidth="4"
         />
       </svg>
     </div>

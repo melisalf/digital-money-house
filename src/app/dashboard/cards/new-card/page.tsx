@@ -1,4 +1,6 @@
+import ErrorMessage from '@/components/common/ErrorMessage';
 import AddCard from '@/components/dashboard/cards/AddCard'
+import CardLimitReached from '@/components/dashboard/cards/CardLimitReached';
 import { getAccount } from '@/services/account.service';
 import { getAllCards } from '@/services/cards.service';
 import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
@@ -10,6 +12,16 @@ const NewCardPage =  async () => {
   const accountData = await getAccount(token);
   const cardsList = await getAllCards(accountData.id, token);
 
+   // Valida si ya tiene 10 tarjetas
+   if (cardsList.length >= 10) {
+    return (
+      
+        <ErrorMessage
+          operationType="limitCards"
+          linkTo="/dashboard/cards" />
+      
+    );
+  }
 
   return (
     <div className='xl:p-5'>
