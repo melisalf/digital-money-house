@@ -1,7 +1,6 @@
 import ArrowIcon from "@/components/common/Icons/ArrowIcon";
 import AliasAndCvu from "@/components/dashboard/profile/AliasAndCvu";
 import Profile from "@/components/dashboard/profile/Profile";
-import ProfileData from "@/components/dashboard/profile/ProfileData";
 import { getAccount } from "@/services/account.service";
 import { getUser } from "@/services/user.service";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
@@ -11,7 +10,6 @@ export default async function ProfilePage() {
   const token = getTokenFromCookie();
   const accountData = await getAccount(token);
   const userData = await getUser(token, accountData.user_id);
-  console.log(userData);
  
 
   return (

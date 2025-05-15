@@ -12,7 +12,7 @@ import { PasswordType } from "@/types/auth.types";
 import { login } from "@/services/auth.service";
 import Link from "../../../../node_modules/next/link";
 import Cookies from "js-cookie";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import CustomToaster from "@/components/common/CustomToaster";
 import BackIcon from "@/components/common/Icons/BackIcon";
 
@@ -54,56 +54,6 @@ export const FormPassword = () => {
       },
     });
   };
-
-  // const onSubmit = async (data: PasswordType) => {
-  //   setServerError(null);
-  //   const body = { email: email, password: data.password };
-
-  //   toast.promise(login(body), {
-  //     loading: "Cargando...",
-  //     success: (loginResponse) => {
-  //       if (loginResponse?.token && !loginResponse.error) {
-  //         Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
-  //         localStorage.setItem("authToken", loginResponse.token);
-  //         router.push("/dashboard");
-  //         return "¡Bienvenido! Redirigiendo...";
-  //       } else {
-  //         setServerError("Credenciales incorrectas. Intente nuevamente.");
-  //         throw new Error("Error de autenticación");
-  //       }
-  //     },
-  //     error: "Ha ocurrido un error. Intente nuevamente.",
-
-  //   });
-  // };
-
-  // const onSubmit = async (data: PasswordType) => {
-  //   setServerError(null);
-  //   const body = { email: email, password: data.password };
-  //   try {
-  //     const loginResponse = await login(body);
-
-  //     if (loginResponse?.error) {
-  //       setServerError("Credenciales incorrectas. Intente nuevamente");
-  //       return;
-  //     }
-
-  //     //si existe el token en la respuesta y no hay error:
-  //     if (loginResponse?.token && !loginResponse.error) {
-  //       //guardamos el token en un cookie que expira en 1 hora.
-  //       Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
-  //       //guardamos el token en el localStorage.
-  //       localStorage.setItem("authToken", loginResponse.token);
-  //       //nos redirigimos al home.
-  //       console.log("Login exitoso");
-  //       //se podria poner un modal con un mensaje de exito y que luego nos redirija
-  //       //loadingMessage();
-  //       router.push("/dashboard");
-  //     }
-  //   } catch (error) {
-  //     setServerError("Ha ocurrido un error. Intenta iniciar nuevamente.");
-  //   }
-  // };
 
   return (
     <>

@@ -10,12 +10,10 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // se puede usar un manejador de estado para guardar esta info. Como Redux.
 
   const token = getTokenFromCookie();
   const accountData = await getAccount(token);
   const userId = accountData.user_id;
-  console.log(userId);
   const userData = await getUser(token, userId);
 
   return (

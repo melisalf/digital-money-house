@@ -4,7 +4,6 @@ import { getAllServices } from "@/services/services.service";
 const PayServicesPage = async () => {
 
   const servicesList = await getAllServices();
-  console.log(servicesList);
   const showServicePage = true;
 
   return (

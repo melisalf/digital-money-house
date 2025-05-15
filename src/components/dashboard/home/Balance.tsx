@@ -10,9 +10,6 @@ type BalanceProps = {
 
 const Balance = ( {available_amount}: BalanceProps ) => {
 
-
-  console.log(available_amount);
-
   const formattedSaldo = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",

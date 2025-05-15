@@ -14,7 +14,6 @@ export default async function CardsPage() {
 
   
   const countCards = cardsList.length + 1
-  console.log(countCards)
 
   // TRUE cuando esta en true se muestran todas las tarjetas con un select.
   // FALSE cuando esta en false se muestran todas las tarjetas con un delete.

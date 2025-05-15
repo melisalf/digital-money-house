@@ -50,7 +50,6 @@ const SelectCard = ({
         description: `Pago a ${service.name}`,
         destination: service.name,
       };
-      console.log(data);
   
       const transaction = await newTransaction(token, accountId, data);
       setTransaction(transaction);

@@ -54,29 +54,6 @@ const RegisterForm = () => {
   };
   
 
-  // const onSubmitRegister = async (data: RegisterFormType) => {
-  //   try {
-  //     setServerError(null);
-  //     const requestBody: RegisterBodyType = {
-  //       ...data,
-  //       dni: Number(data.dni), // Convertir a número
-  //     };
-
-  //     const response = await newUser(requestBody);
-  //     reset();
-  //     if (response) {
-  //       Cookies.set("isRegisterSuccess", "true", { expires: 1 / 24 });
-  //       router.push("/register/success");
-       
-  //     }
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //       setServerError(error.message);
-  //     } else {
-  //       setServerError("Error desconocido en el registro", error);
-  //     }
-  //   }
-  // };
 
   return (
     <>

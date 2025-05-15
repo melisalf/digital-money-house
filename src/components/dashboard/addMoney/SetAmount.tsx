@@ -29,7 +29,6 @@ const SetAmount = () => {
     const redirectCheckAddMoneyPage = (amountNumber: number) => {
       if (amountNumber > 0) {
         setAmount(amountNumber)
-        console.log(amount)
         router.push(`/dashboard/add-money/card/amount/checked`);
       }
     };

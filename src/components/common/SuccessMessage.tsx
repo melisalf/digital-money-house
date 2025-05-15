@@ -22,6 +22,8 @@ const SuccessMessage = ({
   const { cardId } = useSelectCard();
   const { transaction } = useTransaction();
 
+  if (!transaction) return null; 
+
   const handlePushToDashboard = () => {
     router.push("/dashboard");
   };
@@ -36,7 +38,7 @@ const SuccessMessage = ({
     currency: "ARS",
   });
 
-  if (transaction) {
+  
     return (
       <>
         <section className="flex flex-col gap-5">
@@ -126,7 +128,7 @@ const SuccessMessage = ({
         </section>
       </>
     );
-  }
+  
 };
 
 export default SuccessMessage;

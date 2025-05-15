@@ -31,7 +31,6 @@ const UserCards = ({
         .toString()
         .slice(-4)}`
     );
-    console.log(cardId);
   };
 
   const handleDeleteCard = async (card_id: number) => {

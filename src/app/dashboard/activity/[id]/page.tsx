@@ -10,7 +10,6 @@ const ActivityDetailPage = async ({params} : {params: {id: string}}) => {
     const accountData = await getAccount(token);
     const transaction_id = params.id
     const transaction = await getTransactionId(token, accountData.id, Number(transaction_id))
-    console.log(transaction);
 
     return (
     <div>

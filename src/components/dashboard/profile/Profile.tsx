@@ -12,7 +12,6 @@ type ProfileProps = {
 };
 
 const Profile = ({ userData, token }: ProfileProps) => {
-  console.log(userData);
   const [editableField, setEditableField] = useState<string | null>(null);
   const [formValues, setFormValues] = useState({
     email: userData.email,

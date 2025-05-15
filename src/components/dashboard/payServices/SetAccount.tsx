@@ -4,7 +4,6 @@ import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import ErrorMessage from "../../common/ErrorMessage";
 
 
 const ACCOUNT = 37289701912;
@@ -54,8 +53,7 @@ const SetAccount = () => {
 
   const redirectPaymentServicePage = (account: string) => {
     if (account || account.length === 11) {
-      setAccount(account);
-      console.log(account);
+      setAccount(account);;
       router.push(`/dashboard/pay-services/account/checked`);
     }
   };

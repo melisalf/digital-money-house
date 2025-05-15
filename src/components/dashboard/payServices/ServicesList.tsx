@@ -27,7 +27,6 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
 
   const handleSelectService = (service: ServiceType) => {
     setServiceId(service.id.toString());
-    console.log(serviceId);
     router.push(`/dashboard/pay-services/account`);
   };
 
