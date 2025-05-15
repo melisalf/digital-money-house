@@ -16,7 +16,7 @@ const RegisterSuccess = () => {
     </div>
     <Link
       href="/login"
-      className="w-full text-base p-3 bg-green md:p-5 rounded-[10px] font-bold text-center text-black w-72 md:w-[360px]"
+      className="w-full text-base p-3 bg-green md:p-5 focus:outline-2 focus:outline-black rounded-[10px] font-bold text-center text-black w-72 md:w-[360px]"
     >
       Continuar
     </Link>

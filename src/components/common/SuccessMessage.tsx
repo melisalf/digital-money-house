@@ -1,144 +1,132 @@
 "use client";
 import CheckIcon from "@/components/common/Icons/CheckIcon";
-import { useSelectCard, useSetAmount } from "@/context/moneyContext";
+import { useSelectCard } from "@/context/moneyContext";
 import { useTransaction } from "@/context/transactionContext";
+import { operationTexts } from "@/data/successContent";
 import { AccountType } from "@/types/account.types";
 import { downloadReceiptPDF } from "@/utils/downloadReceiptPDF";
 import { formatDated } from "@/utils/formatDated";
 import { useRouter } from "next/navigation";
-
-
-type OperationType = "addCard" | "addMoney" | "payService";
+import ReceiptOperation from "./ReceiptOperation";
 
 type SuccessMessageProps = {
   accountData: AccountType;
-  showAddMoneyPage?: boolean;
-  showPayServicePage?: boolean;
-  onClose?: () => void;
-  operationType: OperationType;
-  linkTo?: string;
+  operationType: "addMoney" | "payService";
 };
 
 const SuccessMessage = ({
   accountData,
   operationType,
-  showAddMoneyPage,
-  showPayServicePage,
 }: SuccessMessageProps) => {
-  const { amount } = useSetAmount();
-  const { cardId, setCardId } = useSelectCard();
-  const {transaction} = useTransaction();
-  const date = new Date();
   const router = useRouter();
+  const { cardId } = useSelectCard();
+  const { transaction } = useTransaction();
 
   const handlePushToDashboard = () => {
     router.push("/dashboard");
-    setCardId(0);
   };
 
   const handleDownloadReceipt = () => {
-    console.log("✅ Descargando comprobante...");
     downloadReceiptPDF("receipt-content");
+
   };
 
-  return (
-    <>
-      <section className="flex flex-col gap-5">
-        <div className="w-full flex flex-col gap-3 items-center justify-center bg-green py-4 md:py-5 rounded-[8px]">
-          <div className="flex items-center w-16">
+  const formattedAmount = transaction?.amount.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  });
+
+  if (transaction) {
+    return (
+      <>
+        <section className="flex flex-col gap-5">
+          <div className="w-full flex flex-col gap-3 items-center justify-center bg-green py-4 md:py-5 rounded-[8px]">
             <CheckIcon className="fill-black w-16" />
+            <h2 className="font-bold text-base md:text-2xl text-black">
+              {operationType === "addMoney"
+                ? operationTexts.addMoney.title
+                : operationTexts.payService.title}
+            </h2>
           </div>
 
-          <h2 className="font-bold text-base md:text-2xl text-black">
-            {showAddMoneyPage
-              ? "Ya cargamos el dinero en tu cuenta"
-              : "Ya realizamos tu pago"}
-          </h2>
-        </div>
-        <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
-          <div className="flex flex-col gap-6 mb-4 mt-2 xl:mt-4 md:ml-6">
-            <div className="flex flex-col gap-1">
-              <p className="font-normal text-xs"> {formatDated(date)} </p>
-              <p className="font-bold text-xl text-green">
-                {amount.toLocaleString("es-AR", {
-                  style: "currency",
-                  currency: "ARS",
-                })}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="font-normal text-xs">Para</p>
-              <p className="font-bold text-xl text-green">
-                {showAddMoneyPage && <span>Cuenta propia</span>}
-                {showPayServicePage && (
-                  <span>
-                    {/* Aca deberia decir el nombre del servicio. Que es el atributo "name" del servicio o el atributo "destination de la operacion." */}
-                  </span>
-                )}
-              </p>
-            </div>
-
-            {showAddMoneyPage && (
+          <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
+            <div className="flex flex-col gap-6 mb-4 mt-2 xl:mt-4 md:ml-6">
               <div className="flex flex-col gap-1">
-                <p className="font-normal text-base">Digital Money House</p>
-                <p className="font-normal text-xs">CVU {accountData.cvu}</p>
-              </div>
-            )}
-
-            {showPayServicePage && (
-              <div className="flex flex-col gap-1">
-                <p className="font-normal text-base">Tarjeta</p>
                 <p className="font-normal text-xs">
-                  {/* Aca deberian mostrarse el numero de la tarjeta que se utilizo para pagar el servicio donde solo se muestran visibles los ultimos 4 digitos.  */}
+                  {formatDated(transaction.dated)}
+                </p>
+                <p className="font-bold text-xl text-green">
+                  {formattedAmount}
                 </p>
               </div>
-            )}
-          </div>
-        </div>
 
-        <div className="w-full xl:justify-items-end flex-col gap-5 flex md:flex-row-reverse">
-          <div className="w-full xl:w-[233px]">
+              <div className="flex flex-col gap-1">
+                <p className="font-normal text-base">Para</p>
+                <p className="font-bold text-xl text-green">
+                  {operationType === "addMoney"
+                    ? operationTexts.addMoney.destination
+                    : operationTexts.payService.destination(
+                        transaction.description
+                      )}
+                </p>
+              </div>
+
+              {operationType === "payService" ? (
+                <div className="flex flex-col gap-1">
+                  <p className="font-normal text-base">
+                    {operationTexts.payService.origin}
+                  </p>
+                  <p className="font-normal text-xs">
+                    {operationTexts.payService.description(cardId)}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1">
+                  <p className="font-normal text-base">
+                    {operationTexts.addMoney.origin}
+                  </p>
+                  <p className="font-normal text-xs">
+                    {operationTexts.addMoney.description(accountData)}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Botones */}
+          <div className="w-full md:justify-items-stretch xl:justify-items-end flex-col gap-5 flex md:flex-row-reverse">
             <button
               onClick={handleDownloadReceipt}
-              className="w-full bg-green border-green h-[50px] md:h-[64px] flex p-5 font-bold text-center text-dark1 items-center rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] justify-center"
+              className="w-full h-[50px] md:h-[64px] xl:w-[233px] bg-green text-dark1 font-bold py-3 rounded-[10px] shadow"
             >
               Descargar comprobante
             </button>
-            {/* HTML oculto del comprobante */}
-            <div id="receipt-content" className="hidden">
-              <h2 className="text-lg font-bold mb-4 text-black">
-                Comprobante de operación
-              </h2>
-              <p>
-                <strong>Fecha:</strong> 24 de abril de 2025
-              </p>
-              <p>
-                <strong>Monto:</strong> $1.000,00
-              </p>
-              <p>
-                <strong>Medio de pago:</strong> Tarjeta terminada en 1234
-              </p>
-              <p>
-                <strong>Servicio:</strong> Agua Río Cuarto
-              </p>
-              <p>
-                <strong>ID Transacción:</strong> #ABC123456
-              </p>
-            </div>
-          </div>
-          <div className="w-full xl:w-[233px]">
             <button
               onClick={handlePushToDashboard}
-              className="w-full bg-button1 border-button1 border-green h-[50px] md:h-[64px] flex p-5 font-bold text-center text-dark1 items-center rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] justify-center"
+              className="w-full h-[50px] md:h-[64px] xl:w-[233px] bg-button1 text-dark1 font-bold py-3 rounded-[10px] shadow"
             >
               Ir al inicio
             </button>
           </div>
-        </div>
-      </section>
-    </>
-  );
+
+          {/* HTML OCULTO PARA PDF */}
+
+          <div
+            id="receipt-content"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "-9999px",
+              visibility: "hidden",
+              zIndex: -1,
+            }}
+          >
+            <ReceiptOperation accountData={accountData} />
+          </div>
+        </section>
+      </>
+    );
+  }
 };
 
 export default SuccessMessage;

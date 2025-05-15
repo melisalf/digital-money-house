@@ -15,10 +15,6 @@ export const newDeposit = async (token: string, account_id: number, data: NewDep
         if (!token || !account_id) {
           throw new Error("Token o account_id no válidos");
         }
-        
-        console.log("🔹 Enviando POST request a la API...");
-        console.log(`URL: ${BASE_URL}/accounts/${account_id}/deposits`);
-        console.log("Token:", token);
     
         const response = await fetch(`${BASE_URL}/accounts/${account_id}/deposits`, {
           method: 'POST',
@@ -29,8 +25,6 @@ export const newDeposit = async (token: string, account_id: number, data: NewDep
           body: JSON.stringify(data),
         });
     
-        console.log("🔹 Respuesta de la API:", response);
-    
         if (!response.ok) {
           const errorData = await response.json();
           console.error("⚠️ Error en la respuesta de la API:", errorData);
@@ -38,7 +32,6 @@ export const newDeposit = async (token: string, account_id: number, data: NewDep
         }
         const deposit: TransactionType = await response.json();
         return deposit;
-        console.log("✅ Deposito realizado con exito");
     
       } catch (error) {
         console.error("Error new deposit:", error);

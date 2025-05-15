@@ -5,7 +5,8 @@ import { CardType } from "@/types/card.types";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
+import CustomToaster from "@/components/common/CustomToaster";
 import UserCards from "../dashboard/cards/UserCards";
 import { newTransaction } from "@/services/transactions.service";
 import { useSelectService } from "@/context/moneyContext";
@@ -46,7 +47,8 @@ const SelectCard = ({
       const data = {
         amount: -Math.abs(numberAmount) || 0,
         dated: newDate.toString(),
-        description: `Pago a ${service.name}`
+        description: `Pago a ${service.name}`,
+        destination: service.name,
       };
       console.log(data);
   
@@ -57,6 +59,7 @@ const SelectCard = ({
     } catch (error) {
       toast.error("Error al realizar el pago");
       console.error(error);
+      router.push("/dashboard/pay-services/account/checked/error")
     }
   };
   
@@ -74,7 +77,7 @@ const handleAction = () => {
   if (showPayServicePage) {
     handlePayService();
   } else {
-    checkSelectCard(); // esta ya la tenías
+    checkSelectCard();
   }
 };
 
@@ -82,6 +85,7 @@ const handleAction = () => {
 
   return (
     <section className="flex flex-col gap-5">
+      <CustomToaster />
       <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] p-5 md:px-12 md:py-12">
         <h2 className="font-bold text-xl text-green1 pl-2 pb-3 md:pl-0 md:text-2xl">
           Seleccionar tarjeta

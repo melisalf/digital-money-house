@@ -6,6 +6,7 @@ import HamburguesaIcon from "../common/Icons/HamburguesaIcon";
 import { useState } from "react";
 import { CloseIcon } from "../common/Icons/CloseIcon";
 import Sidebar from "../dashboard/layout/Sidebar";
+import { UserDataType } from "@/types/user.types";
 
 type Link = {
   href: string;
@@ -21,6 +22,7 @@ interface NavbarProps {
   buttonsLinks?: Link[];
   isLogged?: boolean;
   userName?: string;
+  userData?: UserDataType;
 }
 
 export default function Navbar({
@@ -30,6 +32,7 @@ export default function Navbar({
   buttonsLinks,
   isLogged,
   userName,
+  userData,
 }: NavbarProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -60,7 +63,7 @@ export default function Navbar({
                 key={`${link.text}-${index}`}
                 href={link.href}
                 className={clsx(
-                  " border-2 px-3 py-1 md:px-5  md:py-2 rounded-[5px] font-bold text-sm text-center",
+                  " border-2 px-3 py-1.5 md:px-5  md:py-2 rounded-[5px] font-bold text-sm text-center",
                   {
                     "bg-green text-black border-none": !link.outline,
                     "border-green text-green": link.outline,
@@ -73,12 +76,17 @@ export default function Navbar({
             ))}
           {isLogged && userName && (
             <div className="flex flex-row justify-center items-center gap-3">
-              <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
+              {/* <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
                 <span className="text-base md:text-xl font-bold text-dark1">
                   {userName
                     .split(" ")
                     .map((word) => word[0])
                     .join("")}
+                </span>
+              </div> */}
+              <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
+                <span className="text-base md:text-xl font-bold text-dark1">
+                  {userData?.firstname.charAt(0).toUpperCase()}{userData?.lastname.charAt(0).toUpperCase()}
                 </span>
               </div>
               <Link href="/dashboard" className="hidden md:block">

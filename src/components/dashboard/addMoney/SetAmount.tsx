@@ -1,8 +1,9 @@
 "use client";
+import CustomToaster from "@/components/common/CustomToaster";
 import { useSetAmount } from "@/context/moneyContext";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 
 const SetAmount = () => {
@@ -12,10 +13,17 @@ const SetAmount = () => {
   const checkAddAmount = () => {
       const amountNumber = Number(amount);
       if (!amountNumber || amountNumber <= 0 ) {
-        toast.error("Ingrese un importe mayor a $0 para continuar.");
+        toast.error("Ingrese un importe para continuar.");
         return;
       } 
-      redirectCheckAddMoneyPage(amountNumber);
+      if (amountNumber > 1000000 ) {
+        toast.error("El máximo permitido es $1000000.");
+        return;
+      } 
+      else {
+        redirectCheckAddMoneyPage(amountNumber);
+      }
+      ;
     };
 
     const redirectCheckAddMoneyPage = (amountNumber: number) => {
@@ -35,12 +43,8 @@ const SetAmount = () => {
 
   return (
     <>
-     <Toaster
-    position="bottom-right"
-    toastOptions={{
-      className: "text-dark2 bg-green border-green",
-    }}
-  />
+  <CustomToaster />
+
     <section className="flex flex-col gap-5">
      
      <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] px-6 py-4 md:px-8 md:gap-6 md:py-6 xl:py-8 xl:px-12">

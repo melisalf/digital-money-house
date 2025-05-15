@@ -44,7 +44,7 @@ export const FormEmail = () => {
         />
 
         <SubmitButton
-          className="w-full  bg-green focus:outline-2 focus:outline-black"
+          className="w-full bg-green focus:outline-2 focus:outline-black"
           text={"Continuar"}
         />
         {!isRegisterSuccess && (

@@ -25,14 +25,16 @@ export default async function DashboardLayout({
         logoClassName="fill-green"
         isLogged
         userName={`${userData.firstname} ${userData.lastname}`}
+        userData={userData}
       />
+
 
       <main className="w-full p-5 flex flex-col grow md:flex-row bg-gray1 md:p-0 xl:p-0">
         <aside className="hidden md:bg-green md:block md:w-2/5 xl:w-1/5 ">
           <Sidebar></Sidebar>
         </aside>
 
-        <div className=" w-full gap-5 md:px-12 md:py-14 xl:px-20 xl:py-10 flex-col flex">
+        <div className=" w-full gap-5 md:p-12 xl:px-20 xl:py-10 flex-col flex">
           <div className="w-full flex md:hidden">
             <Breadcrumb />
           </div>

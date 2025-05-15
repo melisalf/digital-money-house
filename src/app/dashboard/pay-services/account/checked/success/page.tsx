@@ -1,20 +1,13 @@
-import SuccessMessage from '@/components/common/SuccessMessage';
-import { getAccount } from '@/services/account.service';
-import { getTokenFromCookie } from '@/utils/getTokenFromCookie';
-import React from 'react'
 
-const PayServicesSuccess = async () => {
+import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
+import { getAccount } from "@/services/account.service";
+import SuccessMessage from "@/components/common/SuccessMessage";
 
+const PayServicesSuccessPage = async () => {
   const token = getTokenFromCookie();
   const accountData = await getAccount(token);
-  const showPayServicePage = true;
 
-  return (
-    <SuccessMessage
-    operationType='payService'
-    accountData = {accountData}
-    showPayServicePage = {showPayServicePage}/>
-  )
-}
+  return <SuccessMessage accountData={accountData} operationType="payService" />;
+};
 
-export default PayServicesSuccess
+export default PayServicesSuccessPage

@@ -12,28 +12,14 @@ import { PasswordType } from "@/types/auth.types";
 import { login } from "@/services/auth.service";
 import Link from "../../../../node_modules/next/link";
 import Cookies from "js-cookie";
-import { useToken } from "@/context/tokenContext";
 import { toast, Toaster } from "sonner";
+import CustomToaster from "@/components/common/CustomToaster";
+import BackIcon from "@/components/common/Icons/BackIcon";
 
 export const FormPassword = () => {
   const { email } = useEmail();
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
-
-  const loadingMessage = () => {
-    const promise = () =>
-      new Promise((resolve) =>
-        setTimeout(() => resolve({ message: "Bienvenido!!" }), 2000)
-      );
-
-    toast.promise(promise, {
-      loading: "Loading...",
-      success: (data: any) => {
-        return `${data.message} Aguarda un momento.`;
-      },
-      error: "Error",
-    });
-  };
 
   const methods = useForm({
     resolver: yupResolver(PasswordScheme),
@@ -41,63 +27,94 @@ export const FormPassword = () => {
 
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = methods;
 
   const onSubmit = async (data: PasswordType) => {
     setServerError(null);
-    const body = { email: email, password: data.password };
-    try {
-      const loginResponse = await login(body);
+    const body = { email, password: data.password };
 
-      if (loginResponse?.error) {
-        setServerError("Credenciales incorrectas. Intente nuevamente");
-        return;
+    const promise = login(body).then((res) => {
+      if (!res || res.error || !res.token) {
+        throw new Error("Credenciales incorrectas. Intente nuevamente.");
       }
 
-      //si existe el token en la respuesta y no hay error:
-      if (loginResponse?.token && !loginResponse.error) {
-        //guardamos el token en un cookie que expira en 1 hora.
-        Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
-        //guardamos el token en el localStorage.
-        localStorage.setItem("authToken", loginResponse.token);
-        //guardamos el token en un estado global.
-        // setToken(loginResponse.token);
-        //nos redirigimos al home.
-        console.log("Login exitoso");
-        //se podria poner un modal con un mensaje de exito y que luego nos redirija
-        //loadingMessage();
-        router.push("/dashboard");
-      }
-    } catch (error) {
-      setServerError("Ha ocurrido un error. Intenta iniciar nuevamente.");
-    }
+      Cookies.set("authToken", res.token, { expires: 1 / 24 });
+      localStorage.setItem("authToken", res.token);
+      router.push("/dashboard");
+      return "¡Bienvenido! Redirigiendo...";
+    });
+
+    toast.promise(promise, {
+      loading: "Cargando...",
+      success: (msg) => msg,
+      error: (err) => {
+        setServerError("Credenciales incorrectas. Intente nuevamente."); // actualiza el error en pantalla
+        return "¡Error! Revise los datos.";
+      },
+    });
   };
+
+  // const onSubmit = async (data: PasswordType) => {
+  //   setServerError(null);
+  //   const body = { email: email, password: data.password };
+
+  //   toast.promise(login(body), {
+  //     loading: "Cargando...",
+  //     success: (loginResponse) => {
+  //       if (loginResponse?.token && !loginResponse.error) {
+  //         Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
+  //         localStorage.setItem("authToken", loginResponse.token);
+  //         router.push("/dashboard");
+  //         return "¡Bienvenido! Redirigiendo...";
+  //       } else {
+  //         setServerError("Credenciales incorrectas. Intente nuevamente.");
+  //         throw new Error("Error de autenticación");
+  //       }
+  //     },
+  //     error: "Ha ocurrido un error. Intente nuevamente.",
+
+  //   });
+  // };
+
+  // const onSubmit = async (data: PasswordType) => {
+  //   setServerError(null);
+  //   const body = { email: email, password: data.password };
+  //   try {
+  //     const loginResponse = await login(body);
+
+  //     if (loginResponse?.error) {
+  //       setServerError("Credenciales incorrectas. Intente nuevamente");
+  //       return;
+  //     }
+
+  //     //si existe el token en la respuesta y no hay error:
+  //     if (loginResponse?.token && !loginResponse.error) {
+  //       //guardamos el token en un cookie que expira en 1 hora.
+  //       Cookies.set("authToken", loginResponse.token, { expires: 1 / 24 });
+  //       //guardamos el token en el localStorage.
+  //       localStorage.setItem("authToken", loginResponse.token);
+  //       //nos redirigimos al home.
+  //       console.log("Login exitoso");
+  //       //se podria poner un modal con un mensaje de exito y que luego nos redirija
+  //       //loadingMessage();
+  //       router.push("/dashboard");
+  //     }
+  //   } catch (error) {
+  //     setServerError("Ha ocurrido un error. Intenta iniciar nuevamente.");
+  //   }
+  // };
 
   return (
     <>
-      {/* <Toaster
-        position="bottom-center"
-        richColors
-        offset="20vh" 
-        mobileOffset={{ bottom: '200px' }}
-        toastOptions={{
-          style: {
-            background: '#0AEB8C',
-            color: "black",
-            fontSize: "16px",
-            fontWeight: "bold",
-            padding: "10px",
-          },
-        }}
-      /> */}
+      <CustomToaster />
       <FormProvider {...methods}>
         <form
-          className="w-full flex flex-col gap-5 "
+          className="w-full flex flex-col "
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputText
-            inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
+            inputClassName=""
             placeholder="Correo electrónico"
             fieldName="email"
             type="email"
@@ -106,7 +123,7 @@ export const FormPassword = () => {
             style={{ display: "none" }}
           />
           <InputText
-            inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
+            inputClassName=""
             type="password"
             placeholder="Contraseña"
             fieldName="password"
@@ -114,12 +131,17 @@ export const FormPassword = () => {
           />
 
           <SubmitButton
-            className="w-full  bg-green focus:outline-2 focus:outline-black"
+            className="w-full bg-green focus:outline-2 focus:outline-black mt-5"
             text={"Continuar"}
+            isLoading={isSubmitting}
           />
           {serverError && (
-            <Link href={"/login"}>
-              <p className="w-full max-w-[300px] font-semibold md:max-w-[360px] flex flex-col text-sm italic text-error1 pt-2 pl-3 m:pl-5 text-center">
+            <Link
+              href={"/login"}
+              className="w-full cursor-pointer flex items-center mt-2 gap-2 p-2"
+            >
+              <span> <BackIcon className="w-[20px] h-[20px]"/> </span>
+              <p className="w-full max-w-[300px] md:max-w-[360px] text-sm text-center italic text-error1 font-semibold">
                 {serverError}
               </p>
             </Link>

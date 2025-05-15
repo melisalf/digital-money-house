@@ -5,8 +5,9 @@ import { servicesData } from "@/data/services";
 import { ServiceType } from "@/types/service.types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import useServices from "@/hooks/useServices";
+import CustomToaster from "@/components/common/CustomToaster";
 
 
 type ServicesListProps = {
@@ -26,7 +27,6 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
 
   const handleSelectService = (service: ServiceType) => {
     setServiceId(service.id.toString());
-    toast.success(`Se selecciono el servicio: ${service.name}`);
     console.log(serviceId);
     router.push(`/dashboard/pay-services/account`);
   };
@@ -35,6 +35,8 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
 
   return (
     <>
+    <CustomToaster />
+
       <section className="w-full flex flex-col items-center gap-5">
         {/* Buscador */}
         <div className="w-full h-[64px] flex items-center gap-5 p-5 md:px-8 md:gap-8 xl:px-12 bg-white border border-gray1 rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)]">
@@ -58,12 +60,12 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
             </p>
           ) : (
             <>
-              <Toaster
+              {/* <Toaster
                 position="bottom-right"
                 toastOptions={{
                   className: "text-dark2 bg-green border-green",
                 }}
-              />
+              /> */}
               <ul className="w-full">
                 {filteredServices.map((service, index) => (
                   <li

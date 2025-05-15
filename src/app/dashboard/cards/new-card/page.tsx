@@ -1,6 +1,5 @@
 import ErrorMessage from '@/components/common/ErrorMessage';
 import AddCard from '@/components/dashboard/cards/AddCard'
-import CardLimitReached from '@/components/dashboard/cards/CardLimitReached';
 import { getAccount } from '@/services/account.service';
 import { getAllCards } from '@/services/cards.service';
 import { getTokenFromCookie } from '@/utils/getTokenFromCookie';

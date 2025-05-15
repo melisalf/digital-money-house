@@ -9,8 +9,9 @@ type ActivityDetailProps = {
 };
 
 const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
-  console.log(transaction);
   const router = useRouter();
+  const random = Math.floor(Math.random() * 1e7);
+  const operationNumber = `${random}${Number(transaction.id)}`;
 
   const handlePushToDashboard = () => {
     router.push("/dashboard");
@@ -22,7 +23,7 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
 
   return (
     <section className="flex flex-col gap-5">
-      <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
+      <div className="bg-dark1 flex flex-col rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
         <div className=" flex flex-col gap-5 md:gap-8 pb-4 md:mx-6 md:flex-col-reverse xl:flex-row xl:justify-between xl:items-center md:border-b md:border-gray1">
           {/* titulo */}
           <div className="w-full flex flex-row items-center gap-3">
@@ -43,10 +44,17 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
         </div>
 
         {/* informacion de la trasacción */}
-        <div className="flex flex-col gap-6 mb-4 mt-2 md:pl-6 xl:mt-4">
-          {/* monto */}
+        <div className="flex flex-col gap-5 xl:gap-6 mb-4 md:pl-6 xl:mt-4 xl:mb-0">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-bold">Transferencia de dinero</p>
+            {/* tipo de operacion */}
+
+            <p className="text-sm font-bold">
+              {transaction.type === "Deposit"
+                ? "Deposito"
+                : "Transferencia de dinero"}
+            </p>
+            {/* monto */}
+
             <p className="font-bold text-xl text-green">
               {transaction.amount.toLocaleString("es-AR", {
                 style: "currency",
@@ -56,21 +64,33 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <p className="font-normal text-xs">Le transferiste a</p>
-            <p className="font-bold text-xl text-green">
-              {transaction.destination} Cuenta propia
+            <p className="font-normal text-xs">
+              {transaction.type === "Deposit"
+                ? "Ingresaste dinero a"
+                : "Le transferiste a"}
             </p>
+
+            {transaction.type === "Deposit" ? (
+              <p className="font-bold text-xl text-green">
+                {transaction.destination}
+              </p>
+            ) : (
+              <p className="font-bold text-xl text-green">
+                {transaction.description}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
             <p className="font-normal text-xs">Número de operación</p>
             <p className="font-normal text-base text-green">
-              {transaction.id}
+              {operationNumber}
             </p>
           </div>
         </div>
       </div>
 
+      {/* botones */}
       <div className="w-full xl:justify-items-end flex-col gap-5 flex md:flex-row-reverse">
         <div className="w-full xl:w-1/4">
           <button

@@ -1,4 +1,5 @@
 import { FormPassword } from "@/components/auth/login/FormPassword";
+import CustomToaster from "@/components/common/CustomToaster";
 import Navbar from "@/components/layout/Navbar";
 import React from "react";
 
@@ -16,11 +17,8 @@ const LoginPasswordPage = () => {
             Ingresá tu contraseña
           </h1>
         </div>
-        
-          
+        <CustomToaster />
         <FormPassword />
-        
-
       </main>
     </>
   );

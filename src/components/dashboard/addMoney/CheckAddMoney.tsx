@@ -71,7 +71,7 @@ const CheckAddMoney = ({ accountData, token }: CheckAddMoneyProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <p className="font-normal text-base">Brubank</p>
+            <p className="font-normal text-base">Digital Money House </p>
             <p className="font-normal text-xs">CVU {accountData.cvu}</p>
           </div>
         </div>

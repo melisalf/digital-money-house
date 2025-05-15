@@ -4,8 +4,9 @@ import { deleteCardId } from "@/services/cards.service";
 import { CardType } from "@/types/card.types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { useSelectCard } from "@/context/moneyContext";
+import CustomToaster from "@/components/common/CustomToaster";
 
 type CardsListProps = {
   cardsList: CardType[];
@@ -57,12 +58,8 @@ const UserCards = ({
         <p className="text-gray-500 mt-4">No tienes tarjetas asociadas.</p>
       ) : (
         <>
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              className: "text-dark1 text-sm border border-dark1 rounded-xl shadow-lg",
-            }}
-          />
+      <CustomToaster />
+
           <ul className="w-full">
             {cards.map((card) => (
               <li
@@ -83,21 +80,21 @@ const UserCards = ({
                       onClick={() => {
                         toast.custom(
                           (t) => (
-                            <div className="flex flex-col gap-2 bg-white rounded-xl shadow-lg p-4 text-dark1">
-                              <p className="font-bold">¿Estás seguro?</p>
-                              <p className="text-sm font-semibold">
+                            <div className=" flex flex-col gap-1 md:gap-2 bg-white text-dark1">
+                              <p className="font-bold text-sm md:text-lg ">¿Estás seguro?</p>
+                              <p className="text-xs md:text-base font-semibold">
                                 Vas a eliminar la tarjeta terminada en{" "}
                                 {card.number_id.toString().slice(-4)}
                               </p>
                               <div className="flex items-center gap-2 mt-2 ">
                                 <button
-                                  className="text-sm px-3 py-1 font-semibold rounded-md bg-gray1 border border-dark1 text-dark1 hover:font-bold"
+                                  className="text-xs md:text-sm px-3 py-1 font-semibold rounded-md bg-gray1 border border-dark1 text-dark1 hover:font-bold"
                                   onClick={() => toast.dismiss(t)}
                                 >
                                   Cancelar
                                 </button>
                                 <button
-                                  className="text-sm px-3 py-1 font-semibold rounded-md bg-green border border-dark1 text-dark1 hover:font-bold"
+                                  className="text-xs md:text-sm px-3 py-1 font-semibold rounded-md bg-green border border-dark1 text-dark1 hover:font-bold"
                                   onClick={async () => {
                                     toast.dismiss(t);
                                     await handleDeleteCard(card.id);
@@ -108,7 +105,8 @@ const UserCards = ({
                               </div>
                             </div>
                           ),
-                          { duration: Infinity }
+                          { duration: Infinity, className:"" }
+                         
                         );
                       }}
                     >

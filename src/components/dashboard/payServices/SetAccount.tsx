@@ -1,9 +1,11 @@
 "use client";
+import CustomToaster from "@/components/common/CustomToaster";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast, Toaster } from "sonner";
-import ErrorPay from "../../common/ErrorMessage";
+import { toast } from "sonner";
+import ErrorMessage from "../../common/ErrorMessage";
+
 
 const ACCOUNT = 37289701912;
 
@@ -47,7 +49,7 @@ const SetAccount = () => {
   
 
   const handleErrorNumberAccount = () => {
-    setErrorAccount(true);
+    router.push(`/dashboard/pay-services/account/error`)
   };
 
   const redirectPaymentServicePage = (account: string) => {
@@ -65,14 +67,8 @@ const SetAccount = () => {
 
   return (
     <>
-      <Toaster
-        position="bottom-right"
-        expand={true}
-        richColors
-        toastOptions={{
-          className: "text-dark2 bg-green border-green",
-        }}
-      />
+   <CustomToaster />
+
       {!errorAccount && (
         <section className="flex flex-col gap-5">
           <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] px-6 pt-5 md:px-8 md:py-8 pb-16 md:gap-6 xl:px-12 xl:py-9">
@@ -135,9 +131,7 @@ const SetAccount = () => {
         </section>
       )}
 
-      {errorAccount && (
-        <ErrorPay setErrorAccount={setErrorAccount} showErrorAccount={true} />
-      )}
+    
     </>
   );
 };

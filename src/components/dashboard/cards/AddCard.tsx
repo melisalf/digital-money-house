@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import ImageCard from "./ImageCard";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import clsx from "clsx";
 import { convertDateFormat } from "@/utils/convertDateFormat";
+import CustomToaster from "@/components/common/CustomToaster";
 
 type AddCardProps = {
   account_id: number;
@@ -82,13 +83,15 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
         expiry={cardValues.expirationDate || ""}
         cvc={cardValues.securityCode || ""}
       />
-
+{/* 
       <Toaster
         position="bottom-right"
         toastOptions={{
           className: "text-dark2 bg-green border-green",
         }}
-      />
+      /> */}
+      <CustomToaster />
+
       <FormProvider {...CardFormMethods}>
         <form
           className="w-[300px] md:w-[360px] lg:w-full flex flex-col lg:grid lg:grid-cols-2 items-center justify-between gap-5 md:gap-4 lg:gap-6 "

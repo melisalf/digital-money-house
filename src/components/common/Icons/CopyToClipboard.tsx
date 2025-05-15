@@ -1,6 +1,7 @@
 "use client ";
-import { Toaster, toast } from "sonner";
 import clsx from "clsx";
+import { toast } from "sonner";
+import CustomToaster from "@/components/common/CustomToaster";
 
 interface CopyToClipboardProps {
   className?: string;
@@ -15,7 +16,9 @@ const CopyToClipboard = ({ copyText, className }: CopyToClipboardProps) => {
 
   return (
     <>
-      <Toaster
+      <CustomToaster />
+
+      {/* <Toaster
         position="bottom-right"
 		expand
         toastOptions={{
@@ -27,7 +30,7 @@ const CopyToClipboard = ({ copyText, className }: CopyToClipboardProps) => {
 				width: "300px",
 			  },
         }}
-      />
+      /> */}
 
       <svg
         viewBox="0 0 32 32"

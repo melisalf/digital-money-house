@@ -4,9 +4,9 @@ import Link from "next/link";
 import ArrowIcon from "@/components/common/Icons/ArrowIcon";
 import { TransactionType } from "@/types/transaction.types";
 import useTransactions from "@/hooks/useTransactions";
-import FilterIcon from "@/components/common/Icons/FilterIcon";
 import ButtonFilter from "./ButtonFilter";
 import { useState } from "react";
+import BackIcon from "@/components/common/Icons/BackIcon";
 
 type TransactionsListProps = {
   transactionsList: TransactionType[];
@@ -41,10 +41,10 @@ const TransactionsList = ({
   return (
     <>
       <section className="w-full flex items-center gap-5">
-        <div className="w-full flex items-center gap-5 p-5 md:px-8 md:gap-8 xl:px-12 bg-white border border-select1 rounded-[10px] shadow-md">
+        <div className="w-full flex items-center gap-5 p-5 md:px-8 md:gap-8 xl:px-12 bg-white border border-gray1 rounded-[10px] shadow-md">
           <SearchIcon />
           <input
-            className="text-black/50 text-base w-full outline-none md:text-[18px]"
+            className="text-dark1 text-base w-full outline-none md:text-[18px]"
             type="text"
             placeholder="Buscar en tu actividad"
             defaultValue={searchTerm}
@@ -60,7 +60,7 @@ const TransactionsList = ({
               showFilterPanel={showFilterPanel}
               onApply={applyPeriodFilter}
               onClear={clearFilters}
-              setShowFilterPanel = {setShowFilterPanel}
+              setShowFilterPanel={setShowFilterPanel}
             />
           </div>
         )}
@@ -76,7 +76,7 @@ const TransactionsList = ({
                 showFilterPanel={showFilterPanel}
                 onApply={applyPeriodFilter}
                 onClear={clearFilters}
-                setShowFilterPanel = {setShowFilterPanel}
+                setShowFilterPanel={setShowFilterPanel}
               />
             </div>
           )}
@@ -99,14 +99,14 @@ const TransactionsList = ({
                   </h4>
                 </div>
 
-                <div className="flex flex-col gap-0  items-end text-dark1">
-                  <span className="text-sm md:text-[16px] break-words">
+                <div className="flex flex-col gap-0  items-end ">
+                  <span className="text-sm md:text-[16px] break-words text-dark1">
                     {transaction.amount.toLocaleString("es-AR", {
                       style: "currency",
                       currency: "ARS",
                     })}
                   </span>
-                  <span className=" text-xs md:text-sm opacity-40 ">
+                  <span className=" text-xs md:text-sm text-dark2 opacity-40 ">
                     {getWeekday(transaction.dated)}
                   </span>
                 </div>
@@ -128,23 +128,44 @@ const TransactionsList = ({
         )}
 
         {showActivityPage && totalPages > 1 && (
-          <div className="w-full flex justify-center mt-10 md:mt-5 gap-5">
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-              (page) => (
-                <button
-                  key={page}
-                  className={` text-base text-dark1 font-bold transition-all px-3 md:py-1.5 py-1 ${
-                    page === currentPage
-                      ? "bg-gray1 rounded-[8px] md:bg-button1 md:rounded-none "
-                      : "bg-white"
-                  }`}
-                  onClick={() => changePage(page)}
-                >
-                  {page}
-                </button>
-              )
-            )}
-          </div>
+          <>
+            {/* Mobile */}
+            <div className="w-full flex justify-center gap-4 mt-5 md:hidden">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => changePage(currentPage - 1)}
+                className="text-dark1 font-bold px-3 py-1 disabled:opacity-50"
+              >
+                <BackIcon className="w-4 h-4 fill-dark1" />
+              </button>
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => changePage(currentPage + 1)}
+                className="text-dark1 font-bold px-3 py-1 disabled:opacity-50"
+              >
+                <ArrowIcon className="w-4 h-4 fill-dark1" />
+              </button>
+            </div>
+
+            {/*Tablet y Desktop */}
+            <div className="w-full justify-center mt-8 gap-5 hidden md:flex">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    className={`text-base text-dark1 font-bold transition-all px-3 py-1.5 ${
+                      page === currentPage
+                        ? "bg-button1 rounded-[8px]"
+                        : "bg-white"
+                    }`}
+                    onClick={() => changePage(page)}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+            </div>
+          </>
         )}
       </section>
     </>

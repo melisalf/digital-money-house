@@ -9,6 +9,8 @@ import { useRouter } from "../../../../node_modules/next/navigation";
 import SubmitButton from "@/components/common/form/SubmitButton";
 import Cookies from "js-cookie";
 import { newUser } from "@/services/user.service";
+import CustomToaster from "@/components/common/CustomToaster";
+import { toast } from "sonner";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -22,34 +24,64 @@ const RegisterForm = () => {
     reset,
   } = RegisterFormMethods;
 
-  
-
   const onSubmitRegister = async (data: RegisterFormType) => {
-    try {
-      setServerError(null);
-      const requestBody: RegisterBodyType = {
-        ...data,
-        dni: Number(data.dni), // Convertir a número
-      };
-
-      const response = await newUser(requestBody);
-      reset();
-      if (response) {
+    setServerError(null);
+    const requestBody: RegisterBodyType = {
+      ...data,
+      dni: Number(data.dni),
+    };
+  
+    const registerPromise = newUser(requestBody);
+  
+    toast.promise(registerPromise, {
+      loading: "Creando cuenta...",
+      success: () => {
         Cookies.set("isRegisterSuccess", "true", { expires: 1 / 24 });
         router.push("/register/success");
-       
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setServerError(error.message);
-      } else {
-        setServerError("Error desconocido en el registro", error);
-      }
-    }
+        return "Cuenta creada con éxito.";
+      },
+      error: (err) => {
+        if (err instanceof Error) {
+          setServerError(err.message);
+          return err.message;
+        }
+        setServerError("Error desconocido");
+        return "Error al registrar usuario.";
+      },
+    });
+  
+    reset();
   };
+  
+
+  // const onSubmitRegister = async (data: RegisterFormType) => {
+  //   try {
+  //     setServerError(null);
+  //     const requestBody: RegisterBodyType = {
+  //       ...data,
+  //       dni: Number(data.dni), // Convertir a número
+  //     };
+
+  //     const response = await newUser(requestBody);
+  //     reset();
+  //     if (response) {
+  //       Cookies.set("isRegisterSuccess", "true", { expires: 1 / 24 });
+  //       router.push("/register/success");
+       
+  //     }
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       setServerError(error.message);
+  //     } else {
+  //       setServerError("Error desconocido en el registro", error);
+  //     }
+  //   }
+  // };
 
   return (
-    <FormProvider {...RegisterFormMethods}>
+    <>
+      <CustomToaster />
+      <FormProvider {...RegisterFormMethods}>
       <form
         className="w-full flex flex-col"
         onSubmit={handleSubmit(onSubmitRegister)}
@@ -58,7 +90,6 @@ const RegisterForm = () => {
           {/* Nombre */}
           <div className="">
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="text"
               fieldName="firstname"
               errorText={errors.firstname?.message}
@@ -69,7 +100,6 @@ const RegisterForm = () => {
           {/* Apellido */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="text"
               fieldName="lastname"
               errorText={errors.lastname?.message}
@@ -80,7 +110,6 @@ const RegisterForm = () => {
           {/* DNI */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="text"
               fieldName="dni"
               errorText={errors.dni?.message}
@@ -92,7 +121,6 @@ const RegisterForm = () => {
           {/* Email */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="text"
               fieldName="email"
               errorText={errors.email?.message}
@@ -105,7 +133,7 @@ const RegisterForm = () => {
         <div className=" text-start mb-3 mt-5">
           <p className="text-xs md:tracking-tight text-gray1 md:text-sm xl:text-[14.6px]">
             Usa entre 6 y 20 carácteres (debe contener al menos al menos 1
-            carácter especial, una mayúscula y un número.
+            carácter especial, una mayúscula y un número).
           </p>
         </div>
 
@@ -113,7 +141,6 @@ const RegisterForm = () => {
           {/* Contraseña */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="password"
               fieldName="password"
               errorText={errors.password?.message}
@@ -124,7 +151,6 @@ const RegisterForm = () => {
           {/* Confirmar contraseña */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="password"
               fieldName="confirmPassword"
               errorText={errors.confirmPassword?.message}
@@ -135,7 +161,6 @@ const RegisterForm = () => {
           {/* Telefono */}
           <div>
             <InputText
-              inputClassName="text-black/50 font-normal shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] border border-select1"
               type="text"
               fieldName="phone"
               errorText={errors.phone?.message}
@@ -154,11 +179,16 @@ const RegisterForm = () => {
 
            {/* Mensaje de error del servidor. */}
            {serverError && (
+             <div className="flex items-center">
+                           <p className="w-full  font-semibold flex flex-col text-sm italic text-error1 text-center mt-6">{serverError}</p>
+
+             </div>
             
-            <p className="w-full  font-semibold flex flex-col text-sm italic text-error1 text-center mt-6">{serverError}</p>
           )}
       </form>
     </FormProvider>
+    </>
+
   );
 };
 

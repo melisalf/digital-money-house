@@ -13,8 +13,8 @@ const ArrowFilterDownIcon = () => {
         <path
           d="M1 1L5.5 5L10 1"
           stroke="#052A2D"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     </div>

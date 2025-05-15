@@ -42,16 +42,16 @@ const ErrorMessage = ({
         {linkTo ? (
           <Link
             href={linkTo}
-            className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-lg font-bold flex
-            items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
+            className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-[10px] font-bold flex
+            items-center transition outline-none focus:outline-2 focus:outline-dark1 justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
           >
             {button}
           </Link>
         ) : (
           <button
             onClick={onClose}
-            className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-lg font-bold flex
-            items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
+            className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-[10px] font-bold flex
+            items-center transition outline-none focus:outline-2 focus:outline-dark1 justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
           >
             {button}
           </button>

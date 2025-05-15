@@ -1,25 +1,16 @@
-type OperationType = "addCard" | "addMoney" | "payService";
+import { AccountType } from "@/types/account.types";
 
-export const errorContent: Record<
-  OperationType,
-  { title: string; description: string; button: string }
-> = {
-  addCard: {
-    title: "Límite de tarjetas alcanzado",
-    description:
-      "Ya agregaste 10 tarjetas. Si querés añadir una nueva, primero eliminá una existente.",
-    button: "Volver",
-  },
+export const operationTexts = {
   addMoney: {
-    title: "No encontramos facturas asociadas a este dato",
-    description:
-      "Revisá el dato ingresado. Si es correcto, es posible que la empresa aún no haya cargado tu factura.",
-    button: "Revisar dato",
+    title: "Ya cargamos el dinero en tu cuenta",
+    destination: "Cuenta propia",
+    origin: "Digital Money House",
+    description: (account: AccountType) => account.cvu,
   },
   payService: {
-    title: "Hubo un problema con tu pago",
-    description:
-      "Puede deberse a fondos insuficientes. Comunicate con la entidad emisora de la tarjeta.",
-    button: "Volver a intentarlo",
+    title: "Ya realizaste tu pago",
+    destination: (desc: string) => desc,
+    origin: "Tarjeta",
+    description: (cardId: number) => `Tarjeta terminada en ${cardId.toString().slice(-4)}`,
   },
 };
