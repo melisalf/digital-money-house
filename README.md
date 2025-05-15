@@ -1,4 +1,4 @@
-# 💰 Digital Money House
+# 💲 Digital Money House
 
 ![Portada](/public/assets/cover.png)
 
@@ -22,10 +22,15 @@
 ## 📌 Funcionalidades principales
 
 ✅ Registro e inicio de sesión con autenticación por token.
+
 ✅ Administración de cuentas y tarjetas asociadas.
+
 ✅ Transferencias entre cuentas y consulta de actividad.
+
 ✅ Búsqueda y filtrado de transacciones.
+
 ✅ Copia rápida de alias y CVU.
+
 ✅ Paginación y ordenamiento de movimientos.
 
 ## 📦 Instalación y ejecución
