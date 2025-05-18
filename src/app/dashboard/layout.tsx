@@ -3,6 +3,7 @@ import Sidebar from "@/components/dashboard/layout/Sidebar";
 import Navbar from "@/components/layout/Navbar";
 import { getAccount } from "@/services/account.service";
 import { getUser } from "@/services/user.service";
+import { capitalize } from "@/utils/capitalize";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 
 export default async function DashboardLayout({
@@ -16,13 +17,14 @@ export default async function DashboardLayout({
   const userId = accountData.user_id;
   const userData = await getUser(token, userId);
 
+
   return (
     <>
       <Navbar
         logoLink="/"
         logoClassName="fill-green"
         isLogged
-        userName={`${userData.firstname} ${userData.lastname}`}
+        userName={`${capitalize(userData.firstname)} ${capitalize(userData.lastname)}`}
         userData={userData}
       />
 

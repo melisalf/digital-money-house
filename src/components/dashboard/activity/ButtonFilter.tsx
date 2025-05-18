@@ -1,6 +1,5 @@
 "use client";
 import FilterIcon from "@/components/common/Icons/FilterIcon";
-import { useState } from "react";
 import PeriodFilter from "./PeriodFilter";
 
 type ButtonFilterProps = {

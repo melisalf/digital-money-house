@@ -11,7 +11,6 @@ const ACCOUNT = 37289701912;
 const SetAccount = () => {
   const router = useRouter();
   const [account, setAccount] = useState<string>("");
-  const [errorAccount, setErrorAccount] = useState<boolean>(false);
 
   const checkAddNumberAccount = () => {
     if (!account || account.trim() === "") {
@@ -58,7 +57,7 @@ const SetAccount = () => {
     }
   };
 
-  const onChangeSetAccount = (event: any) => {
+  const onChangeSetAccount = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setAccount(value);
   };
@@ -67,7 +66,7 @@ const SetAccount = () => {
     <>
    <CustomToaster />
 
-      {!errorAccount && (
+      
         <section className="flex flex-col gap-5">
           <div className="bg-dark1 flex flex-col gap-3 rounded-[8px] px-6 pt-5 md:px-8 md:py-8 pb-16 md:gap-6 xl:px-12 xl:py-9">
             <h2 className="font-bold text-xl/6 text-green w-4/6   md:w-full md:pr-2 pb-3 md:pb-0 md:text-2xl">
@@ -127,7 +126,7 @@ const SetAccount = () => {
             </button>
           </div>
         </section>
-      )}
+      
 
     
     </>

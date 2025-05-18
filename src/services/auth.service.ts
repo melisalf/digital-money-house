@@ -20,8 +20,14 @@ export const login = async (data: LoginBodyType): Promise<LoginResponseType> => 
     }
 
     return await response.json();
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
+    // según el caso, podés lanzar o devolver algo
+    throw error;
   }
 }
 

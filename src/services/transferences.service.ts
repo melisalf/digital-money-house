@@ -33,10 +33,16 @@ export const newDeposit = async (token: string, account_id: number, data: NewDep
         const deposit: TransactionType = await response.json();
         return deposit;
     
-      } catch (error) {
-        console.error("Error new deposit:", error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Error mensaje:", error.message);
+        } else {
+          console.error("Error desconocido:", error);
+        }
+        // según el caso, podés lanzar o devolver algo
         throw error;
       }
+      
 }
 
 // GET

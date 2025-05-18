@@ -7,7 +7,7 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com/api";
 export const getUser = async (
   token: string,
   user_id: number
-): Promise<any> => {
+): Promise<UserDataType> => {
   try {
     const response = await fetch(`${BASE_URL}/users/${user_id}`, {
       method: "GET",
@@ -22,12 +22,17 @@ export const getUser = async (
       throw new Error(`Error ${response.status}: ${errorDetails.message}`);
     }
 
-    const data: any = await response.json();
+    const data = await response.json();
     return data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
     throw error;
   }
+  
 };
 
 // POST new user
@@ -56,10 +61,15 @@ export const newUser = async (
     }
 
     return responseData;
-  } catch (error: any) {
-    console.error("Error en la creación del usuario:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
     throw error;
   }
+  
 };
 
 // PUT 

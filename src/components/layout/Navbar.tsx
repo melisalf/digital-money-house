@@ -65,7 +65,7 @@ export default function Navbar({
                 className={clsx(
                   " border-2 px-3 py-1.5 md:px-5  md:py-2 rounded-[5px] font-bold text-sm text-center",
                   {
-                    "bg-green text-black border-none": !link.outline,
+                    "bg-green text-black border border-green": !link.outline,
                     "border-green text-green": link.outline,
                     "bg-secondary text-white": link.solid,
                   }
@@ -76,17 +76,9 @@ export default function Navbar({
             ))}
           {isLogged && userName && (
             <div className="flex flex-row justify-center items-center gap-3">
-              {/* <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
-                <span className="text-base md:text-xl font-bold text-dark1">
-                  {userName
-                    .split(" ")
-                    .map((word) => word[0])
-                    .join("")}
-                </span>
-              </div> */}
               <div className="flex items-center justify-center p-1.5 bg-green rounded-[12px]">
                 <span className="text-base md:text-xl font-bold text-dark1">
-                  {userData?.firstname.charAt(0).toUpperCase()}{userData?.lastname.charAt(0).toUpperCase()}
+                  {userData?.firstname.charAt(0)}{userData?.lastname.charAt(0)}
                 </span>
               </div>
               <Link href="/dashboard" className="hidden md:block">
@@ -131,8 +123,8 @@ export default function Navbar({
             </div>
             <aside className="flex flex-col grow ">
               <Sidebar
-              isOpen = {isOpen}
-              setIsOpen = {setIsOpen} />
+              setIsOpen={setIsOpen}
+             />
             </aside>
           </div>
         </>

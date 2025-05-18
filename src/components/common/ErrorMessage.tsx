@@ -7,18 +7,20 @@ import { useRouter } from "next/navigation";
 type OperationType = "limitCards" | "accountService" | "payService";
 
 type ErrorMessageProps = {
-  onClose?: () => void;
   operationType: OperationType;
-  linkTo?: string;
+ // linkTo?: string;
 };
 
 const ErrorMessage = ({
-  onClose,
   operationType,
-  linkTo,
+ // linkTo,
 }: ErrorMessageProps) => {
-  const router = useRouter();
   const { title, description, button } = errorContent[operationType];
+  const router = useRouter();
+
+  const handleClick = () => {
+        router.back(); 
+  };
 
   return (
     <section className="flex flex-col gap-5">
@@ -37,7 +39,7 @@ const ErrorMessage = ({
           {description}{" "}
         </p>
       </div>
-
+{/* 
       <div className="w-full h-[50px] md:h-[64px] flex justify-end ">
         {linkTo ? (
           <Link
@@ -47,15 +49,15 @@ const ErrorMessage = ({
           >
             {button}
           </Link>
-        ) : (
-          <button
-            onClick={onClose}
-            className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-[10px] font-bold flex
-            items-center transition outline-none focus:outline-2 focus:outline-dark1 justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
-          >
-            {button}
-          </button>
         )}
+      </div> */}
+      <div className="w-full h-[50px] md:h-[64px] flex justify-end">
+        <button
+          onClick={handleClick}
+          className="w-[165px] h-[50px] md:h-[64px] bg-green text-dark1 rounded-[10px] font-bold flex items-center justify-center transition outline-none focus:outline-2 focus:outline-dark1 shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:w-full xl:w-[233px]"
+        >
+          {button}
+        </button>
       </div>
     </section>
   );

@@ -5,7 +5,6 @@ import { servicesData } from "@/data/services";
 import { ServiceType } from "@/types/service.types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import useServices from "@/hooks/useServices";
 import CustomToaster from "@/components/common/CustomToaster";
 
@@ -19,10 +18,9 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
 
   const { filteredServices, searchTerm, handleSearchChange } = useServices(
     servicesList,
-    showServicePage
   );
   const router = useRouter();
-  const {serviceId, setServiceId} = useSelectService();
+  const {setServiceId} = useSelectService();
 
 
   const handleSelectService = (service: ServiceType) => {
@@ -59,12 +57,6 @@ const ServicesList = ({ servicesList, showServicePage }: ServicesListProps) => {
             </p>
           ) : (
             <>
-              {/* <Toaster
-                position="bottom-right"
-                toastOptions={{
-                  className: "text-dark2 bg-green border-green",
-                }}
-              /> */}
               <ul className="w-full">
                 {filteredServices.map((service, index) => (
                   <li

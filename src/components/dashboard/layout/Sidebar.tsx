@@ -5,11 +5,11 @@ import clsx from "clsx";
 import {usePathname, useRouter} from "next/navigation";
 
 type SidebarProps = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  
-}
-const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
+  setIsOpen?: (value: boolean) => void; // solo mobile
+};
+
+
+const Sidebar = ({ setIsOpen }: SidebarProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -25,7 +25,12 @@ const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
   const logoutHandle = () => {
     localStorage.removeItem("authToken");
     Cookies.remove("authToken");
+    if (setIsOpen) setIsOpen(false); // cerrar sidebar
     router.push("/");
+  };
+
+  const handleLinkClick = () => {
+    if (setIsOpen) setIsOpen(false); // cerrar sidebar al navegar
   };
 
   return (
@@ -34,9 +39,10 @@ const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
         <Link
           key={`${item.name}-${index}`}
           href={item.path}
-          className={clsx("text-[17px] text-dark1 hover:font-extrabold ", {
-            "font-extrabold": pathname === item.path && pathname.includes(item.path),
-            "font-semibold": pathname !== item.path,
+          onClick={handleLinkClick}
+          className={clsx("text-[17px] text-dark1 hover:font-bold md:hover:font-extrabold ", {
+            "font-bold md:font-extrabold": pathname === item.path && pathname.includes(item.path),
+            "font-normal md:font-semibold": pathname !== item.path,
           })}
         >
           {item.name}
@@ -45,7 +51,7 @@ const Sidebar = ({isOpen, setIsOpen} : SidebarProps ) => {
 
       <button
         onClick={logoutHandle}
-        className="text-[17px] font-semibold text-dark1/50 hover:font-extrabold"
+        className="text-[17px] font-normal md:font-semibold text-dark1/50 hover:font-bold md:hover:font-extrabold"
       >
         Cerrar sesion
       </button>

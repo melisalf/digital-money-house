@@ -17,7 +17,8 @@ const NewCardPage =  async () => {
       
         <ErrorMessage
           operationType="limitCards"
-          linkTo="/dashboard/cards" />
+       //   linkTo="/dashboard/cards"
+           />
       
     );
   }
@@ -27,7 +28,6 @@ const NewCardPage =  async () => {
       <AddCard
       account_id={accountData.id}
       token = {token}
-      cardsList = {cardsList}
       />
     </div>
   )

@@ -20,7 +20,7 @@ const CheckAddMoney = ({ accountData, token }: CheckAddMoneyProps) => {
     router.push(`/dashboard/add-money/card/amount`);
   };
 
-  const handleSuccessAddMoney = async (event: any) => {
+  const handleSuccessAddMoney = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
       const body = {
         amount: Number(amount),

@@ -32,7 +32,7 @@ const PeriodFilter = ({ onApply, onClear }: PeriodFilterProps) => {
     <>
       <div
         onClick={(event) => event.stopPropagation()}
-        className="w-[250px] md:w-[300px] xl:w-[350px] absolute right-5 top-50 mt-5 md:right-12 xl:right-20 bg-gray1 border border-white  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  z-50 "
+        className="w-[260px] md:w-[300px] xl:w-[350px] absolute right-5 top-50 mt-5 md:right-12 xl:right-20 bg-gray1 border border-white  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]  z-50 "
       >
         <div className="flex justify-between items-center px-7 pt-5 pb-2 gap-5">
           <div className="flex gap-2">

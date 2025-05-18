@@ -6,7 +6,7 @@ const ErrorAccountService = () => {
 
     <ErrorMessage
     operationType="accountService"
-    linkTo="/dashboard/pay-services/account"
+   // linkTo="/dashboard/pay-services/account"
     />
  
   );

@@ -1,10 +1,9 @@
 import { ServiceType } from "@/types/service.types";
 import { useState, ChangeEvent, useEffect } from "react";
 
-const useServices = (allServices: ServiceType[], showServicesPage: boolean) => {
+const useServices = (allServices: ServiceType[]) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredServices, setFilteredServices] = useState<ServiceType[]>(allServices);
-  console.log(allServices);
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -15,7 +14,7 @@ const useServices = (allServices: ServiceType[], showServicesPage: boolean) => {
   useEffect(() => {
     if (searchTerm.trim().length > 0) {
       setFilteredServices(
-        allServices.filter((service: any) =>
+        allServices.filter((service) =>
           service.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );

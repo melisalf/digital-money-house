@@ -48,7 +48,7 @@ export const FormPassword = () => {
     toast.promise(promise, {
       loading: "Cargando...",
       success: (msg) => msg,
-      error: (err) => {
+      error: () => {
         setServerError("Credenciales incorrectas. Intente nuevamente."); // actualiza el error en pantalla
         return "¡Error! Revise los datos.";
       },
@@ -69,7 +69,6 @@ export const FormPassword = () => {
             fieldName="email"
             type="email"
             defaultValue={email}
-            autoComplete="off"
             style={{ display: "none" }}
           />
           <InputText
@@ -90,7 +89,7 @@ export const FormPassword = () => {
               href={"/login"}
               className="w-full cursor-pointer flex items-center mt-2 gap-2 p-2"
             >
-              <span> <BackIcon className="w-[20px] h-[20px]"/> </span>
+              <span> <BackIcon className="w-[20px] h-[20px] fill-error1"/> </span>
               <p className="w-full max-w-[300px] md:max-w-[360px] text-sm text-center italic text-error1 font-semibold">
                 {serverError}
               </p>

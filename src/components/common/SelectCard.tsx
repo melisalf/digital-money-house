@@ -12,6 +12,7 @@ import { newTransaction } from "@/services/transactions.service";
 import { useSelectService } from "@/context/moneyContext";
 import { getServiceId } from "@/services/services.service";
 import { useTransaction } from "@/context/transactionContext";
+import { useEffect } from "react";
 
 
 type SelectCardProps = {
@@ -31,9 +32,13 @@ const SelectCard = ({
   token,
 }: SelectCardProps) => {
   const router = useRouter();
-  const { cardId } = useSelectCard();
+  const { cardId, setCardId } = useSelectCard();
   const { serviceId } = useSelectService();
   const {setTransaction} = useTransaction();
+
+  useEffect(() => {
+    setCardId(null);
+  }, []);
 
   const handlePayService = async () => {
     if (!cardId || cardId === 0) {

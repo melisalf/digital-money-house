@@ -26,6 +26,7 @@ export const downloadReceiptPDF = (
     },
   };
 
+
   // Forzamos un pequeño timeout para asegurar render
   setTimeout(() => {
     html2pdf().set(opt).from(element).save();

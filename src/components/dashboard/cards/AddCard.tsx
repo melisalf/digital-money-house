@@ -3,7 +3,7 @@ import InputText from "@/components/common/form/InputText";
 import SubmitButton from "@/components/common/form/SubmitButton";
 import { CardScheme } from "@/schemes/card.scheme";
 import { newCard } from "@/services/cards.service";
-import { CardBodyType, CardType } from "@/types/card.types";
+import { CardBodyType} from "@/types/card.types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,7 +17,6 @@ import CustomToaster from "@/components/common/CustomToaster";
 type AddCardProps = {
   account_id: number;
   token: string;
-  cardsList: CardType[];
 };
 
 type CardFormData = {
@@ -27,7 +26,7 @@ type CardFormData = {
   securityCode: string;
 };
 
-const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
+const AddCard = ({ token, account_id }: AddCardProps) => {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -59,7 +58,7 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
         number_id: Number(data.numberCard),
       };
 
-      const response = await newCard(account_id, token, requestBody);
+      await newCard(account_id, token, requestBody);
       reset();
       toast.success("Tarjeta agregada con éxito");
       router.push("/dashboard/cards");
@@ -83,13 +82,6 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
         expiry={cardValues.expirationDate || ""}
         cvc={cardValues.securityCode || ""}
       />
-{/* 
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          className: "text-dark2 bg-green border-green",
-        }}
-      /> */}
       <CustomToaster />
 
       <FormProvider {...CardFormMethods}>
@@ -134,7 +126,7 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
                     placeholder="Fecha de vencimiento*"
                     maxLength={5}
                     errorText={errors.expirationDate?.message}
-                    inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-0 lg:pt-5"
+                    inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-5 lg:pt-5"
                     onChange={(e) => {
                       let value = e.target.value.replace(/\D/g, "");
                       if (value.length >= 3) {
@@ -155,13 +147,13 @@ const AddCard = ({ token, account_id, cardsList }: AddCardProps) => {
                 placeholder="Código de seguridad*"
                 errorText={errors.securityCode?.message}
                 maxLength={3}
-                inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-0 lg:pt-5"
+                inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-5 lg:pt-5"
               />
             </div>
           </div>
 
           {/* Disabled hasta que se validen los campos */}
-          <div className="w-full lg:col-span-1 lg:col-start-2 ">
+          <div className="w-full lg:col-span-1 lg:col-start-2 md:mt-5 lg:mt-0 ">
             <SubmitButton
               className={clsx("transition-all duration-300", {
                 "bg-green border-green cursor-pointer text-dark1": isValid,

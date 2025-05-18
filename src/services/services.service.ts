@@ -29,8 +29,12 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com";
       const data = JSON.parse(text);
       return Array.isArray(data) ? data : [];
   
-    } catch (error: any) {
-      console.error("Error fetching services:", error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error fetching cards:", error.message);
+      } else {
+        console.error("Error desconocido al obtener tarjetas:", error);
+      }
       return [];
     }
   };
@@ -52,13 +56,17 @@ const BASE_URL = "https://digitalmoney.digitalhouse.com";
         console.error("⚠️ Error en la respuesta de la API:", errorData);
         throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo seleccionar la tarjeta"}`);
       }
-
       return response.json(); 
-  
-    } catch (error: any) {
-      console.error("Error fetching services:", error.message);
-      throw error;
+
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
     }
+    throw error;
+  }
+  
   };
 
   

@@ -13,5 +13,5 @@ export function formatDated(fecha: string | Date): string {
     const fechaHora = date.toLocaleString('es-AR', opciones);
   
     // Reemplaza la coma por " a" y agrega "hs" al final
-    return fechaHora.replace(',', ' a') + ' hs.';
+    return fechaHora.replace(',', ' a las') + ' hs.';
   }

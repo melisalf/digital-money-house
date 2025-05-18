@@ -13,7 +13,7 @@ const SetAmount = () => {
   const checkAddAmount = () => {
       const amountNumber = Number(amount);
       if (!amountNumber || amountNumber <= 0 ) {
-        toast.error("Ingrese un importe para continuar.");
+        toast.error("Ingrese un importe mayor a $0");
         return;
       } 
       if (amountNumber > 1000000 ) {
@@ -33,8 +33,8 @@ const SetAmount = () => {
       }
     };
 
-  const onChangeSetAmount = (event : any) => {
-    const value = event.target.value;
+  const onChangeSetAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value);
     setAmount(value);
   };
 
@@ -55,7 +55,7 @@ const SetAmount = () => {
          <input
          name="amount"
            type="number"
-           value={amount}
+          
            min={1}
            max={1000000}
            placeholder="$0.00"

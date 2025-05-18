@@ -17,9 +17,9 @@ const DetailService = () => {
         setLoading(true);
         const data = await getServiceId(serviceId);
         setService(data);
-      } catch (err: any) {
+      } catch (err) {
         setError("No se pudo cargar el servicio.");
-        console.error(err.message);
+        console.error(err);
       }  finally {
         setLoading(false);
       }

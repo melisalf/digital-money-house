@@ -27,7 +27,6 @@ const TransactionsList = ({
     totalPages,
     applyPeriodFilter,
     clearFilters,
-    period,
   } = useTransactions(transactionsList, showActivityPage);
 
   const [showFilterPanel, setShowFilterPanel] = useState(false);

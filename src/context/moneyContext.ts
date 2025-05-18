@@ -3,12 +3,12 @@
 import { create } from "zustand";
 
 type UseSelectCard = {
-  cardId: number;
-  setCardId: (cardId: number) => void;
+  cardId: number | null;
+  setCardId: (cardId: number | null) => void;
 };
 
 export const useSelectCard = create<UseSelectCard>((set) => ({
-  cardId: 0,
+  cardId: null,
   setCardId: (cardId) => set({ cardId }),
 }));
 

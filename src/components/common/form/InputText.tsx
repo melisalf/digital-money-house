@@ -1,10 +1,14 @@
-import { FieldError, FieldErrorsImpl, Merge, useFormContext } from "react-hook-form";
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, useFormContext } from "react-hook-form";
 import { clsx } from "clsx";
 
+/**
+ * Componente TextInput para entradas de formulario.
+ * @type {React.FC<TextInputProps & React.InputHTMLAttributes<HTMLInputElement>>}
+ */
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   fieldName: string;
   placeholder?: string;
-  errorText?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+  errorText?: string | FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>> | undefined;
   inputClassName?: string;
   value?: string | readonly string[] | number | undefined;
   type?: "text" | "email" | "password" | "number" | "tel" | "url";
@@ -15,6 +19,7 @@ const InputText = ({
   type = "text",
   placeholder,
   errorText,
+  value,
   inputClassName,
   ...props
 }: InputTextProps) => {
@@ -26,6 +31,7 @@ const InputText = ({
       <input
         {...register(fieldName)}
         type={type}
+        value={value}
         placeholder={placeholder}
         {...props}
         className={clsx(

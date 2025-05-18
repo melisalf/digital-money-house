@@ -31,15 +31,16 @@ const Profile = ({ userData, token }: ProfileProps) => {
   };
 
   const saveChanges = async (field: string) => {
+    console.log(field);
     try {
       const payload: Partial<UserDataType> = {
         ...formValues,
       };
       await updateUser(userData.id, payload, token);
       toast.success("Datos actualizados correctamente");
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Error al actualizar los datos");
-      console.error(error.message);
+      console.error(error);
     } finally {
       setEditableField(null);
     }

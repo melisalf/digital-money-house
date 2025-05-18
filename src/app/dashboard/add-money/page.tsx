@@ -6,7 +6,7 @@ import React from 'react'
 
 const AddMoneyPage = () => {
 
-  const showAddMoneyPage= true
+
   
   return(
     <section className="flex flex-col gap-5">

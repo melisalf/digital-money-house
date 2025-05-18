@@ -20,7 +20,7 @@ export const getAccount = async (token: string): Promise<AccountType> => {
       }
   
       return await response.json();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching user data:", error);
       throw error;
     }

@@ -7,6 +7,7 @@ export type CardType = {
   number_id: number;
 };
 
+
 export type CardBodyType = {
   cod: number;
   expiration_date: string;

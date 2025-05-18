@@ -117,9 +117,8 @@ const SuccessMessage = ({
             id="receipt-content"
             style={{
               position: "absolute",
-              top: 0,
-              left: "-9999px",
-              visibility: "hidden",
+              top: 100,
+              left: "10px",
               zIndex: -1,
             }}
           >

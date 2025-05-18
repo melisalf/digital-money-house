@@ -9,6 +9,7 @@ import SubmitButton from "@/components/common/form/SubmitButton";
 import { useRouter } from "next/navigation";
 import { useEmail } from "@/context/emailContext";
 import Cookies from "js-cookie";
+import { EMailType } from "@/types/auth.types";
 
 export const FormEmail = () => {
   const isRegisterSuccess = Cookies.get("isRegisterSuccess");
@@ -22,7 +23,7 @@ export const FormEmail = () => {
     formState: { errors },
   } = methods;
 
-  const onSubmitEmail = (data: any) => {
+  const onSubmitEmail = (data: EMailType) => {
     setEmail(data.email); // Guardamos el correo en el estado global
     localStorage.setItem("email", data.email);
     router.push("/login/password");
@@ -37,7 +38,6 @@ export const FormEmail = () => {
         <InputText
           inputClassName=""
           type="email"
-          autoComplete="off"
           placeholder="Correo electrónico"
           fieldName="email"
           errorText={errors?.email?.message || ""}

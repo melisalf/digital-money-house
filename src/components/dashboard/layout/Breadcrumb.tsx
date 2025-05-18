@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
 import clsx from "clsx";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname} from "next/navigation";
 import ArrowIcon from "@/components/common/Icons/ArrowIcon";
 
 const Breadcrumb = () => {
   const pathname = usePathname();
-  const router = useRouter();
 
   const menuItems = [
     { label: "Inicio", path: "/dashboard" },

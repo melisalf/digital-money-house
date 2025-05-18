@@ -28,8 +28,12 @@ export const getAllCards = async (
 
     const cards = await response.json();
     return Array.isArray(cards) ? cards : [];
-  } catch (error: any) {
-    console.error("Error fetching cards:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching cards:", error.message);
+    } else {
+      console.error("Error desconocido al obtener tarjetas:", error);
+    }
     return [];
   }
 };
@@ -65,17 +69,22 @@ export const getCardId = async (
     }
 
     return await response.json();
-  } catch (error: any) {
-    console.error("Error select card:", error);
+  }  catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
     throw error;
   }
+  
 };
 
 export const newCard = async (
     account_id: number,
     token: string,
     data: CardBodyType
-  ): Promise<any> => {
+  ): Promise<CardType> => {
     try {
       if (!token || !account_id) {
         throw new Error("Token o account_id no válidos");
@@ -96,10 +105,16 @@ export const newCard = async (
       }
   
       return await response.json();
-    } catch (error: any) {
-      console.error("Error new card:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error mensaje:", error.message);
+      } else {
+        console.error("Error desconocido:", error);
+      }
+      // según el caso, podés lanzar o devolver algo
       throw error;
     }
+    
   }
 
 export const deleteCardId = async (
@@ -125,9 +140,15 @@ export const deleteCardId = async (
         throw new Error(`Error ${response.status}: ${errorData.message || "No se pudo eliminar la tarjeta"}`);
       }
   
-    } catch (error: any) {
-      console.error("Error deleting card:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error mensaje:", error.message);
+      } else {
+        console.error("Error desconocido:", error);
+      }
+      // según el caso, podés lanzar o devolver algo
       throw error;
     }
+    
   }
   

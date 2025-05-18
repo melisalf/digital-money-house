@@ -3,6 +3,7 @@ import TransactionsList from "@/components/dashboard/activity/TransactionsList";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 import { getAccount } from "@/services/account.service";
 
+
 const ActivityPage = async () => {
   const token = getTokenFromCookie();
   const accountData = await getAccount(token);

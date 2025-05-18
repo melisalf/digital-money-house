@@ -28,8 +28,12 @@ export const getAllTransactions = async (
 
     const transactions = await response.json();
     return Array.isArray(transactions) ? transactions : [];
-  } catch (error: any) {
-    console.error("Error fetching transactions:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching cards:", error.message);
+    } else {
+      console.error("Error desconocido al obtener tarjetas:", error);
+    }
     return [];
   }
 }
@@ -60,10 +64,15 @@ export const getTransactionId = async (
     }
 
     return await response.json();
-  } catch (error: any) {
-    console.error("Error fetching transaction:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
     throw error;
   }
+  
 }
 
 
@@ -92,10 +101,15 @@ export const newTransaction = async (
 
     const transaction: TransactionType = await response.json();
     return transaction;
-  } catch (error) {
-    console.error("Error al crear transacción:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error mensaje:", error.message);
+    } else {
+      console.error("Error desconocido:", error);
+    }
     throw error;
   }
+  
 };
 
 

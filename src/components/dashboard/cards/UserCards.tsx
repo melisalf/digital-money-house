@@ -79,7 +79,7 @@ const UserCards = ({
                       onClick={() => {
                         toast.custom(
                           (t) => (
-                            <div className=" flex flex-col gap-1 md:gap-2 bg-white text-dark1">
+                            <div className="w-[300px] flex flex-col gap-1 md:gap-2 bg-white text-dark1">
                               <p className="font-bold text-sm md:text-lg ">¿Estás seguro?</p>
                               <p className="text-xs md:text-base font-semibold">
                                 Vas a eliminar la tarjeta terminada en{" "}
