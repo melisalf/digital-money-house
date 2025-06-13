@@ -10,6 +10,7 @@ const Breadcrumb = () => {
   const menuItems = [
     { label: "Inicio", path: "/dashboard" },
     { label: "Actividad", path: "/dashboard/activity" },
+    { label: "Actividad", path: "/dashboard/activity/detail" },
     { label: "Tu perfil", path: "/dashboard/profile" },
     { label: "Cargar dinero", path: "/dashboard/add-money" },
     { label: "Cargar dinero", path: "/dashboard/add-money/bank" },

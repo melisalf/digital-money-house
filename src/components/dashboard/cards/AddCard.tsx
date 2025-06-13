@@ -147,7 +147,7 @@ const AddCard = ({ token, account_id }: AddCardProps) => {
                 placeholder="Código de seguridad*"
                 errorText={errors.securityCode?.message}
                 maxLength={3}
-                inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words md:pt-5 lg:pt-5"
+                inputClassName="md:leading-6 md:placeholder:whitespace-normal md:placeholder:break-words  md:pt-5 lg:pt-5"
               />
             </div>
           </div>

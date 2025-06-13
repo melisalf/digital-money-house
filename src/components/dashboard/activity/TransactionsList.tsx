@@ -87,7 +87,7 @@ const TransactionsList = ({
           <div className="w-full">
             {paginatedTransactions.map((transaction) => (
               <Link
-                href={`/dashboard/activity/${transaction.id}`}
+              href={`/dashboard/activity/detail?id=${transaction.id}`}
                 className="w-full flex flex-row justify-between items-start md:items-center border-b border-button1 md:border-dark1/30 py-3 md:py-4 hover:"
                 key={transaction.id}
               >

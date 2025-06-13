@@ -24,9 +24,9 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
   return (
     <section className="flex flex-col gap-5">
       <div className="bg-dark1 flex flex-col rounded-[8px] p-6 md:px-8 md:gap-6 xl:gap-0 md:py-8">
-        <div className=" flex flex-col gap-5 md:gap-8 pb-4 md:mx-6 md:flex-col-reverse xl:flex-row xl:justify-between xl:items-center md:border-b md:border-gray1">
+        <div className=" flex flex-col gap-3 md:gap-8 pb-4 md:mx-4 md:flex-col-reverse xl:flex-row xl:justify-between xl:items-center md:border-b md:border-gray1">
           {/* titulo */}
-          <div className="w-full flex flex-row items-center gap-3">
+          <div className="w-full flex flex-row items-center gap-3 pb-3 md:pb-0">
             <div className="flex items-center w-7">
               <CheckIcon className="fill-green w-7" />
             </div>
@@ -44,8 +44,8 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
         </div>
 
         {/* informacion de la trasacción */}
-        <div className="flex flex-col gap-5 xl:gap-6 mb-4 md:pl-6 xl:mt-4 xl:mb-0">
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-4 pt-2 md:pt-0 xl:gap-6 mb-4 md:pl-4 xl:mt-4 xl:mb-0">
+          <div className="flex flex-col gap-0.5 md:gap-1">
             {/* tipo de operacion */}
 
             <p className="text-sm font-bold">
@@ -63,7 +63,7 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-0.5 md:gap-1">
             <p className="font-normal text-xs">
               {transaction.type === "Deposit"
                 ? "Ingresaste dinero a"
@@ -81,7 +81,7 @@ const ActivityDetail = ({ transaction }: ActivityDetailProps) => {
             )}
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-0.5 md:gap-1">
             <p className="font-normal text-xs">Número de operación</p>
             <p className="font-normal text-base text-green">
               {operationNumber}

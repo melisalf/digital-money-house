@@ -1,7 +1,6 @@
 "use client";
 import ErrorIcon from "@/components/common/Icons/ErrorIcon";
 import { errorContent } from "@/data/errorContent";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 type OperationType = "limitCards" | "accountService" | "payService";

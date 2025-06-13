@@ -38,7 +38,7 @@ const SelectCard = ({
 
   useEffect(() => {
     setCardId(null);
-  }, []);
+  }, [setCardId]);
 
   const handlePayService = async () => {
     if (!cardId || cardId === 0) {
