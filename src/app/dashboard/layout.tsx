@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
 
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const userId = accountData.user_id;
   const userData = await getUser(token, userId);

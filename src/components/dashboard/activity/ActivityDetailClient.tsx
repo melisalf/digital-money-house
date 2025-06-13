@@ -28,6 +28,7 @@ const ActivityDetailClient = () => {
         const trx = await getTransactionId(token, accountData.id, Number(id));
         setTransaction(trx);
       } catch (err) {
+          console.log(err)
         setError("Error al cargar la transacción.");
       }
     };

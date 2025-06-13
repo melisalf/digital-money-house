@@ -5,7 +5,7 @@ import React from 'react'
 
 const AddMoneyBankPage = async () => {
 
-  const token = getTokenFromCookie();
+  const token =await getTokenFromCookie();
   const accountData = await getAccount(token);
  
   return (

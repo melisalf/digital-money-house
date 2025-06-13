@@ -6,7 +6,7 @@ import React from 'react'
 
 const AddMoneyConfirmPage = async () => {
 
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
 
   return (

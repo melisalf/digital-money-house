@@ -6,7 +6,7 @@ import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 
 
 const PaymentServicePage = async () => {
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const accountId = accountData.id;
   const cardsList = await getAllCards(accountId, token);

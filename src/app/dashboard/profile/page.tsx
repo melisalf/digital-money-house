@@ -7,7 +7,7 @@ import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 import Link from "../../../../node_modules/next/link";
 
 export default async function ProfilePage() {
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const userData = await getUser(token, accountData.user_id);
  

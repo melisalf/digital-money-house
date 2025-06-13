@@ -6,7 +6,7 @@ import { getAllTransactions } from "@/services/transactions.service";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 
 export default async function DashboardPage() {
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const transactionsList = await getAllTransactions(token, accountData.id);
 

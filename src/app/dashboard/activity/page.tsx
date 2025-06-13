@@ -5,7 +5,7 @@ import { getAccount } from "@/services/account.service";
 
 
 const ActivityPage = async () => {
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const transactionsList = await getAllTransactions(token, accountData.id);
 

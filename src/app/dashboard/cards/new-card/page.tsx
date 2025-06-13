@@ -7,7 +7,7 @@ import React from 'react'
 
 const NewCardPage =  async () => {
  
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
   const cardsList = await getAllCards(accountData.id, token);
 

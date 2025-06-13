@@ -3,7 +3,7 @@ import { getAccount } from "@/services/account.service";
 import { getTokenFromCookie } from "@/utils/getTokenFromCookie";
 
 const AddMoneySuccessPage = async () => {
-  const token = getTokenFromCookie();
+  const token = await getTokenFromCookie();
   const accountData = await getAccount(token);
 
   return (
